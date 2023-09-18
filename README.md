@@ -1,7 +1,7 @@
-npm install 
-npm run dev 
-(in a new terminal) php artisan serve 
-project will be served on http://127.0.0.1:8000
+#npm install 
+#npm run dev 
+#(in a new terminal) php artisan serve 
+#project will be served on http://127.0.0.1:8000
 
 ![image](https://github.com/Mouhib-Saleh/Co-Lance/assets/58568739/8cad57ad-2f46-4fd3-80cd-6c9694b30e37)
 ![image](https://github.com/Mouhib-Saleh/Co-Lance/assets/58568739/d78f6cd7-57b5-4bf4-88f9-4195b9a431f8)
