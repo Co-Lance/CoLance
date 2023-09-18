@@ -28,7 +28,7 @@
             <div class="hidden md:block">
                 <div class="ml-4 flex items-center md:ml-6">
                 <div>
-    <button onclick="toggleDarkMode()" class="h-6 w-6">
+    <button class="h-6 w-6">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="white">
             <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
         </svg>
@@ -54,7 +54,7 @@
                 ></path>
               </svg>
                     </button>
-                    <a href="">
+                    <a href="{{ url('/auth') }}">
                         <button
                             class="bg-transparent hover:bg-teal-800 text-teal-700 font-semibold hover:text-white py-2 px-4 border border-teal-500 hover:border-transparent rounded">
                             Login
