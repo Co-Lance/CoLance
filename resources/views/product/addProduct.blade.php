@@ -54,7 +54,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-              Products
+            Add product
             </h1>
         </nav>
        
@@ -64,37 +64,36 @@
             <!-- Content for each tab goes here -->
           
             
-          <div class="flex gap-3 flex-wrap justify-center mt-5">
-          @foreach($listproducts as $product)
-        <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow">
-            <div class="rounded-t-lg w-full h-2/4">
-                <img src="{{ $product->image }}" alt="" class="rounded-t-lg w-full h-full object-cover" />
-            </div>
-            <div class="flex flex-col p-5">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $product->name }}</h5>
-                <p class="mb-3 font-normal text-md text-gray-700">{{ $product->description }}</p>
-                <!-- Assuming you have a URL for a 'Continue' link -->
-                <div>
-                <a  href="{{ route('products.delete', ['id' => $product->id]) }}" class="mt-auto">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
-                       supprimer
-                        
-                    </span></a>
-                    <a  href="{{ route('products.edit', ['id' => $product->id]) }}">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
-                       modifier
-                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                </a></div>
-            </div>
+          <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
+        
+          
+    <!-- Product Form -->
+    <form action="{{ url('/storeProduct') }}" method="post" class="w-full max-w-sm">
+        @csrf
+        <div class="mb-4">
+            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>
+            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
         </div>
-    @endforeach
-
-
-         
-
+        <div class="mb-4">
+            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image URL:</label>
+            <input type="text" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div class="mb-4">
+            <label for="user_full_name" class="block text-gray-700 text-sm font-bold mb-2">User Full Name:</label>
+            <input type="text" name="user_full_name" id="user_full_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div class="mb-4">
+            <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Quantity:</label>
+            <input type="number" name="quantity" id="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div class="mb-4">
+            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+            <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            Add Product
+        </button>
+    </form>
 
 
         </div>
