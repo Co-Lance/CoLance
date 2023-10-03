@@ -22,4 +22,9 @@ Route::get('/', function () {
 
 Route::get('/auth', [AuthController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
-Route::resource('formus', CompanyController::class);
+Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
+Route::get('/addForum', [ForumController::class, 'create']);
+Route::post('/storeForum', [ForumController::class, 'store'])->name('forums.store');
+Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
+Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
+Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');

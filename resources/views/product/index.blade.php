@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="<?php echo str_replace('_', '-', app()->getLocale()); ?>">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,73 +16,59 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
 </head>
 
-<body>
-<div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
+<div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
+    <nav class="bg-white shadow-lg p-6 mb-10">
+        <h1 class="text-2xl font-bold text-blue-950">
+            Forums
+        </h1>
+    </nav>
 
-    <div class="flex pb-10 flex-col md:w-4/12 md:h-screen lg:w-2/12 lg:h-screen w-screen bg-gray-900 shadow-lg" >
-        <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
-            <a href="/">
-                <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
-            </a>
-        </div>
-      
-        <div class="lg:block md:block mt-4">
-            <div id="profile" class="space-y-3 mt-8">
-                <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg" alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
-                <div>
-                    <h2 class="font-medium text-md md:text-sm text-center text-red-600">Admin</h2>
-                    <p class="text-md text-gray-300 text-center">Foulen ben foulen</p>
+    <div class="flex flex-col flex-grow p-4 items-center">
+        <!-- Content for each tab goes here -->
+
+        <div class="flex gap-3 flex-wrap justify-center mt-5">
+            @foreach($listforums as $forum)
+            <div class="flex flex-col max-w-xs bg-white border border-gray-200 rounded-lg shadow">
+                <div class="rounded-t-lg w-full h-2/4">
+                    <img src="{{ $forum->image }}" alt="" class="rounded-t-lg w-full h-full object-cover" />
                 </div>
-            </div>
-            <div class="pr-16 mt-10">
-                <div class="p-4">
-                    <div id="menu" class="flex flex-col space-y-2">
-                        <a href="#" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Courses</a>
-                        <a href="#" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Schedule</a>
-                        <a href="#" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Students</a>
-                        <a href="#" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Settings</a>
+                <div class="flex flex-col p-5">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $forum->name }}</h5>
+                    <p class="mb-3 font-normal text-md text-gray-700">{{ $forum->description }}</p>
+                    <!-- Assuming you have a URL for a 'Continue' link -->
+                    <div>
+                        <a href="{{ route('forums.delete', ['id' => $forum->id]) }}" class="mt-auto">
+                            <span
+                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                                Supprimer
+                            </span>
+                        </a>
+                        <a href="{{ route('forums.edit', ['id' => $forum->id]) }}">
+                            <span
+                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                                Modifier
+                                <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </span>
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-        <a href="/auth" class="md:block lg:block text-sm mt-auto text-center -ml-4 font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out">
-            <span>Logout</span>
-        </a>
-    </div>
-
-    <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
-        <nav class="bg-white shadow-lg p-6 mb-10">
-            <h1 class="text-2xl font-bold text-blue-950">
-              Products
-            </h1>
-        </nav>
-        <div class="flex flex-col flex-grow p-4">
-            
-            <!-- Content for each tab goes here -->
-           <div className='flex flex-grow bg-white justify-center p-5'>
-            
-            @foreach($listproducts as $product)
-            <div>
-                <strong>Name:</strong> {{ $product->name }} <br>
-                <strong>Image:</strong> {{ $product->image }} <br>
-                <strong>User Full Name:</strong> {{ $product->user_full_name }} <br>
-                <strong>Quantity:</strong> {{ $product->quantity }} <br>
-                <strong>Description:</strong> {{ $product->description }}
-            </div>
-            <br>
-        @endforeach
-
-
-        </div>
-
-
-
-        </div>
-        <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+            @endforeach
         </div>
     </div>
 
+    <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+        <p>&copy; <?php echo date('Y'); ?> Co-Lance <span class="ml-2">&trade;</span></p>
+    </div>
 </div>
+
+<body>
+
 </body>
+
 </html>
