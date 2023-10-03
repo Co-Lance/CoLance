@@ -20,7 +20,6 @@
                     </a>
                     Create Forum
                 </div>
-                Create Forum
             </div>
             <a href="{{ route('forums.index') }}"
                 class="bg-green-600 hover:bg-green-800 text-white py-2 px-4  mb-4 inline-block  rounded-full mx-auto">Back</a>
