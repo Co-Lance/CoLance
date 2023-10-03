@@ -38,42 +38,43 @@ class ForumController extends Controller
     }
 
     public function edit($id)
-{
-    $forum = Forum::find($id);
+    {
+        $forum = Forum::find($id);
 
-    if (!$forum) {
-        return response()->json(['message' => 'Forum not found'], 404);
+        if (!$forum) {
+            return response()->json(['message' => 'Forum not found'], 404);
+        }
+
+        return view('forums.edit', compact('forum'));
     }
 
-    return view('forums.edit')->with('forum', $forum);
-}
     public function update(Request $request, $id)
-{
-    // Find the forum by its ID
-    $forum = Forum::findOrFail($id);
+    {
+        // Find the forum by its ID
+        $forum = Forum::findOrFail($id);
 
-    // Update the forum with the new data
-    $forum->update([
-        'name' => $request->input('name'),
-        'title' => $request->input('title'),
-        'description' => $request->input('description'),
-        'user_name' => $request->input('user_name'),
-        'comments' => $request->input('comments'),
-    ]);
+        // Update the forum with the new data
+        $forum->update([
+            'name' => $request->input('name'),
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'user_name' => $request->input('user_name'),
+            'comments' => $request->input('comments'),
+        ]);
 
-    return redirect()->route('forums.index')->with('success', 'Forum added successfully!');
-}
+        return redirect()->route('forums.index')->with('success', 'Forum updated successfully!');
+    }
 
     public function delete($id)
-{
-    $forum = Forum::find($id);
+    {
+        $forum = Forum::find($id);
 
-    if (!$forum) {
-        return response()->json(['message' => 'Forum not found'], 404);
+        if (!$forum) {
+            return response()->json(['message' => 'Forum not found'], 404);
+        }
+
+        $forum->delete();
+
+        return redirect()->back()->with('success', 'Forum deleted successfully');
     }
-
-    $forum->delete();
-
-    return redirect()->back()->with('success', 'Forum deleted successfully');
-}
 }

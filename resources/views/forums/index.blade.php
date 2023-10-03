@@ -1,58 +1,108 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<div class="flex justify-center">
-    <div class="w-full sm:w-2/3 lg:w-1/2 xl:w-1/3">
-        <div class="bg-white shadow-md rounded-lg">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-            <div class="bg-gray-50 border-b px-6 py-4">
-                <h2 class="text-2xl font-semibold">{{ __('Forums') }}</h2>
-            </div>
+    <title>Co-Lance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-            <div class="p-6">
-                @if (session('success'))
-                <div class="mb-4 text-green-800">{{ session('success') }}</div>
-                @endif
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css">
 
-                @if ($forums->isEmpty())
-                <p>{{ __('No forums found.') }}</p>
-                @else
-                <ul class="divide-y divide-gray-200">
-                    @foreach ($forums as $forum)
-                    <li class="py-4">
-                        <div class="mb-2">
-                            <h3 class="text-lg font-semibold">{{ $forum->title }}</h3>
-                            <p class="text-gray-500">{{ $forum->description }}</p>
-                            <p class="text-gray-500">{{ __('Created by') }}: {{ $forum->user_name }}</p>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                            <a href="{{ route('forums.show', $forum) }}" class="text-blue-600 hover:underline">
-                                {{ __('View Comments') }}
-                            </a>
-                            <a href="{{ route('forums.edit', $forum) }}" class="text-yellow-600 hover:underline">
-                                {{ __('Edit') }}
-                            </a>
-                            <form action="{{ route('forums.destroy', $forum) }}" method="POST" class="inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:underline">{{ __('Delete') }}</button>
-                            </form>
-                        </div>
-                    </li>
-                    @endforeach
-                </ul>
-                @endif
-            </div>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+</head>
 
-            <div class="bg-gray-50 px-6 py-4">
-                <a href="{{ route('forums.create') }}"
-                    class="inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md">
-                    {{ __('Create Forum') }}
+<body class="bg-gradient-to-r from-gray-100 to-zinc-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-1/6 bg-gray-900 shadow-lg">
+            <div class="flex items-center justify-center mt-5 mb-8">
+                <a href="/">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
+                        alt="Logo" style="width: 150px">
                 </a>
             </div>
 
+            <div class="mt-4">
+                <div id="profile" class="space-y-3 mt-8">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg"
+                        alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
+                    <div>
+                        <h2 class="font-medium text-md md:text-sm text-center text-red-600">Admin</h2>
+                        <p class="text-md text-gray-300 text-center">Foulen ben foulen</p>
+                    </div>
+                </div>
+            </div>
+            <a href="/auth"
+                class="block text-sm mt-auto text-center -ml-4 font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out">
+                <span>Logout</span>
+            </a>
+        </div>
+
+        <!-- Content -->
+        <div class="w-5/6">
+            <div class="container mx-auto mt-2 px-4 py-8">
+                <div class="flex justify-between items-center mb-4">
+                    <div class="items-center justify-center mt-5 -ml-2">
+                        <a href="/">
+                            <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
+                                alt="Logo" style="width: 150px">
+                        </a>
+                    </div>
+                    <h2 class="text-4xl font-bold text-gray-800 mb-2">Welcome to the Co-Lance Forums</h2>
+                    <a href="{{ route('forums.create') }}"
+                        class="bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md">Create Forum</a>
+                </div>
+
+                @if(session('success'))
+                <div class="bg-green-900 text-white px-4 py-2 mb-4 shadow-md rounded">{{ session('success') }}</div>
+                @error('name')
+                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                @enderror
+                @endif
+
+                <div class="overflow-x-auto">
+                    <table class="w-full bg-white shadow-md rounded">
+                        <thead>
+                            <tr class="bg-gradient-to-r from-green-700 to-black text-white">
+                                <th class="py-3 px-6 text-left">Title</th>
+                                <th class="py-3 px-6 text-left">Description</th>
+                                <th class="py-3 px-6 text-left">User Name</th>
+                                <th class="py-3 px-6 text-left">Comments</th>
+                                <th class="py-3 px-6 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($forums as $forum)
+                            <tr>
+                                <td class="py-4 px-6">{{ $forum->title }}</td>
+                                <td class="py-4 px-6">{{ $forum->description }}</td>
+                                <td class="py-4 px-6">{{ $forum->user_name }}</td>
+                                <td class="py-4 px-6">{{ $forum->comments }}</td>
+                                <td class="py-4 px-6 text-center">
+
+                                    <a href="{{ route('forums.edit', $forum->id) }}"
+                                        class="text-yellow-600 hover:text-yellow-800 mx-2">Edit</a>
+                                    <form action="{{ route('forums.delete', $forum->id) }}" method="POST"
+                                        class="inline">
+                                        @csrf
+                                        @method('GET')
+                                        <button type="submit"
+                                            class="text-red-600 hover:text-red-800 mx-2">Delete</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-</div>
+</body>
 
 </html>
