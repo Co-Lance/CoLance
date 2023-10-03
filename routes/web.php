@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 
+use App\Http\Controllers\OffreController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,5 +31,16 @@ Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('pro
 Route::put('/products/edit/mod/{id}', [ProductController::class, 'update'])->name('products.update');
 
 
+
+
+
+
+//offres
+Route::get('/offres', [OffreController::class, 'index'])->name('offres');
+Route::get('/offre/create',[OffreController::class,'create'])->name('createoffre');
+Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre');
+Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
+Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
+Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
 
 
