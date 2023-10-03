@@ -14,6 +14,10 @@
                             class="px-3 py-2 rounded-md text-md font-medium text-gray-300 bg-teal-800 focus:outline-none focus:text-white focus:bg-gray-700">
                             CO-LANCE
                         </a>
+                        <a href="{{route('wallets.index')}}"
+                            class="px-3 py-2 rounded-md text-md font-medium text-gray-300 bg-teal-800 focus:outline-none focus:text-white focus:bg-gray-700">
+                            Wallet
+                        </a>
                         <a href=""
                             class="ml-4 px-3 py-2 rounded-md text-md font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
                             Offers
@@ -63,13 +67,7 @@
                     <!-- Profile dropdown -->
                     <div class="ml-3 relative" x-data="{ open: false }">
                         <div>
-                            <button @click="open = !open"
-                                class="max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid"
-                                id="user-menu" aria-label="User menu" aria-haspopup="true">
-                                <img class="h-10 w-10 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
-                            </button>
+                            <
                         </div>
                         <!-- Dropdown menu -->
                         <div x-show="open" @click.away="open = false"
