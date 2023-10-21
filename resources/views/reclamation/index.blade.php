@@ -87,6 +87,11 @@
                         </svg>
                     </span>
                 </a></div>
+                <a href="{{ url('/generate-pdf' , ['id' => $reclamation->id]) }}" class="btn btn-primary"> <span class="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-green-500 border border-2 border-green-500 rounded-lg hover:bg-green-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300">
+                       download reclamation
+                        
+                    </span></a>
+
             </div>
         </div>
     @endforeach

@@ -7,6 +7,7 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OffreController;
 
+use App\Http\Controllers\PDFController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,3 +55,4 @@ Route::post('/storeReclamation', [ReclamationController::class, 'storeReclamatio
 Route::get('/reclamation/delete/{id}', [ReclamationController::class, 'delete'])->name('reclamation.delete');
 Route::get('/reclamation/edit/{id}', [ReclamationController::class, 'edit'])->name('reclamation.edit');
 Route::put('/reclamation/edit/mod/{id}', [ReclamationController::class, 'update'])->name('reclamation.update');
+Route::get('/generate-pdf/{id}', [PDFController::class, 'generatePDF']);
