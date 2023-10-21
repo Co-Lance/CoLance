@@ -54,7 +54,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-            Add product
+              update Categories
             </h1>
         </nav>
        
@@ -62,76 +62,55 @@
         <div class="flex flex-col flex-grow p-4 items-center ">
             
             <!-- Content for each tab goes here -->
-          
-            
-          <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
+
+
+            <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
         
-          
-    <!-- Product Form -->
-    <form action="{{ url('/storeProduct') }}" method="post" class="w-full max-w-sm">
-        @csrf
-        <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image URL:</label>
-            <input type="text" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('image')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="user_full_name" class="block text-gray-700 text-sm font-bold mb-2">User Full Name:</label>
-            <input type="text" name="user_full_name" id="user_full_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('user_full_name')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Quantity:</label>
-            <input type="number" name="quantity" id="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('quantity')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-            <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-        </div>
-        @error('description')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
+        <p>Category Name: {{ $category->name }}</p>
+        <!-- Edit Product Form -->
+<form action="{{ route('categories.update', ['id' => $category->id]) }}" method="post" class="w-full max-w-sm">
+  @csrf
+  @method('PUT') <!-- Use the PUT method for updating -->
 
+  <div class="mb-4">
+      <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Category Name:</label>
+      <input type="text" name="name" id="name" value="{{ $category->name }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+  </div>
+  
+  
+ 
+  <div class="mb-4">
+      <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+      <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>{{ $category->description }}</textarea>
+  </div>
+ 
+  <div class="mb-4">
+                    <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Category Color:</label>
+                    <input type="color" value="{{ $category->color }}" name="color" id="color" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                 
+                </div>
+ 
+ 
+ 
+  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      Update Category
+  </button>
+</form>
 
-                                            <div class="mb-4">
-        <label for="offer_id" class="block text-gray-700 text-sm font-bold mb-2">Select an Offer:</label>
-        <select name="offer_id" id="offer_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <option value="">No Offer</option> <!-- Optional: Include a "No Offer" option -->
-            @foreach ($offers as $offer)
-                <option value="{{ $offer->id }}">{{ $offer->name }}</option>
-            @endforeach
-        </select>
-    </div>
+        <a href="{{ route('categories.index') }}">Back to Categories</a>
+
+      </div>
+      </div>
+
+     
+
+  
 
 
 
 
-
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Add Product
-        </button>
-    </form>
-
-
-        </div>
-        </div>
-
-
-
-
-        <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+        <div class="mt-auto p-3 text-gray-600 text-center w-full">
+            <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 
