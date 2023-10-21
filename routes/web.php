@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OffreController;
+use App\Http\Controllers\ForumController;
 
 use App\Http\Controllers\PDFController;
 
@@ -32,6 +33,16 @@ Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name(
 Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/edit/mod/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
+
+//forum
+Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
+Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forums.show');
+Route::get('/addForum', [ForumController::class, 'create'])->name('forums.create');
+Route::post('/storeForum', [ForumController::class, 'store'])->name('forums.store');
+Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
+Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
+Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
 
 
 
