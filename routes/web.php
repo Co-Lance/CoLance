@@ -22,6 +22,8 @@ Route::get('/', function () {
 
 Route::get('/auth', [AuthController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
+
+//forum 
 Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
 Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forums.show');
 Route::get('/addForum', [ForumController::class, 'create'])->name('forums.create');
