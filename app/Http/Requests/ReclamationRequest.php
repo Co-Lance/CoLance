@@ -27,6 +27,7 @@ class ReclamationRequest extends FormRequest
             'type' => 'required|string|max:255',
             'contact' => 'required|string|max:255',
             'description' => 'required|string',
+            'product_id' => 'required|integer|exists:products,id',
         ];
     }
 }

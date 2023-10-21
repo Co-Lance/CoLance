@@ -15,5 +15,10 @@ class Reclamation extends Model
         'user',
         'type',
         'contact',
+        'product_id'
     ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

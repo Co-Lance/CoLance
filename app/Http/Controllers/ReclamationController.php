@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReclamationRequest;
 use App\Models\Reclamation;
+use App\Models\Product;
 
 class ReclamationController extends Controller
 {
@@ -15,7 +16,9 @@ class ReclamationController extends Controller
     }
     public function addReclamation()
     {
-        return view('reclamation.addReclamation');
+        $products = Product::all();
+
+        return view('reclamation.addReclamation', ['products' => $products]);
     }
     public function storeReclamation(ReclamationRequest $request)
     {
