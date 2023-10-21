@@ -24,7 +24,7 @@
                 <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
             </a>
         </div>
-      
+   
         <div class="lg:block md:block mt-4">
             <div id="profile" class="space-y-3 mt-8">
                 <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg" alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
@@ -40,10 +40,9 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-                        <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
-                        <a href="{{ url('/addCategories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
                         <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
                         <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
+                  
                     </div>
                 </div>
             </div>
@@ -56,7 +55,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-            Add product
+            Add reclamation
             </h1>
         </nav>
        
@@ -69,59 +68,40 @@
           <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
         
           
-    <!-- Product Form -->
-    <form action="{{ url('/storeProduct') }}" method="post" class="w-full max-w-sm">
+    <form action="{{ url('/storeReclamation') }}" method="post" class="w-full max-w-sm">
         @csrf
         <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-        </div>
-        <div class="mb-4">
-            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image URL:</label>
-            <input type="text" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('image')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="user_full_name" class="block text-gray-700 text-sm font-bold mb-2">User Full Name:</label>
-            <input type="text" name="user_full_name" id="user_full_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('user_full_name')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Quantity:</label>
-            <input type="number" name="quantity" id="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('quantity')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Reclamtion Title:</label>
+            <input type="text" name="title" id="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
         </div>
         <div class="mb-4">
             <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
             <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
         </div>
-        @error('description')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-
-
-                                            <div class="mb-4">
-        <label for="offer_id" class="block text-gray-700 text-sm font-bold mb-2">Select an Offer:</label>
-        <select name="offer_id" id="offer_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <option value="">No Offer</option> <!-- Optional: Include a "No Offer" option -->
-            @foreach ($offers as $offer)
-                <option value="{{ $offer->id }}">{{ $offer->name }}</option>
-            @endforeach
-        </select>
-    </div>
-
-
-
-
-
+        <div class="mb-4">
+    <label for="product" class="block text-gray-700 text-sm font-bold mb-2">Product:</label>
+    <select name="product_id" id="product_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        @foreach($products as $product)
+            <option value="{{ $product->id }}">{{ $product->name }}</option>
+        @endforeach
+    </select>
+</div>
+        <div class="mb-4">
+            <label for="user" class="block text-gray-700 text-sm font-bold mb-2">Your Name:</label>
+            <input type="text" name="user" id="user" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div class="mb-4">
+            <label for="type" class="block text-gray-700 text-sm font-bold mb-2">type:</label>
+            <input type="text" name="type" id="type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+        <div class="mb-4">
+            <label for="contact" class="block text-gray-700 text-sm font-bold mb-2">how we can contact you:</label>
+            <input type="text" name="contact" id="contact" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+        </div>
+      
+     
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Add Product
+            Add Reclamation
         </button>
     </form>
 
@@ -133,7 +113,7 @@
 
 
         <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+            <p>&copy; <?php echo date('Y'); ?> Copyrights colance <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 
