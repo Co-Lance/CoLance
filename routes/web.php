@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReclamationController;
-
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OffreController;
 
 
@@ -30,6 +30,8 @@ Route::post('/storeProduct', [ProductController::class, 'storeProduct'])->name('
 Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name('products.delete');
 Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/edit/mod/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
 
 
 
