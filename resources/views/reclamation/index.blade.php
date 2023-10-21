@@ -40,10 +40,9 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-                        <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
-                        <a href="{{ url('/addCategories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
                         <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
                         <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
+                  
                     </div>
                 </div>
             </div>
@@ -56,7 +55,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-            Add product
+              Reclamations
             </h1>
         </nav>
        
@@ -66,64 +65,40 @@
             <!-- Content for each tab goes here -->
           
             
-          <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
-        
+          <div class="flex gap-3 flex-wrap justify-center mt-5">
+          @foreach($listReclamation as $reclamation)
+        <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow">
           
-    <!-- Product Form -->
-    <form action="{{ url('/storeProduct') }}" method="post" class="w-full max-w-sm">
-        @csrf
-        <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Product Name:</label>
-            <input type="text" name="name" id="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <div class="flex flex-col p-5">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $reclamation->title }}</h5>
+                <p class="mb-3 font-normal text-md text-gray-700">{{ $reclamation->description }}</p>
+                <!-- Assuming you have a URL for a 'Continue' link -->
+                <div>
+                <a  href="{{ route('reclamation.delete', ['id' => $reclamation->id]) }}" class="mt-auto">
+                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                       supprimer
+                        
+                    </span></a>
+                    <a  href="{{ route('reclamation.edit', ['id' => $reclamation->id]) }}">
+                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                       modifier
+                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </span>
+                </a></div>
+                <a href="{{ url('/generate-pdf' , ['id' => $reclamation->id]) }}" class="btn btn-primary"> <span class="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-green-500 border border-2 border-green-500 rounded-lg hover:bg-green-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300">
+                       download reclamation
+                        
+                    </span></a>
+
+            </div>
         </div>
-        <div class="mb-4">
-            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image URL:</label>
-            <input type="text" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('image')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="user_full_name" class="block text-gray-700 text-sm font-bold mb-2">User Full Name:</label>
-            <input type="text" name="user_full_name" id="user_full_name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('user_full_name')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Quantity:</label>
-            <input type="number" name="quantity" id="quantity" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-            @error('quantity')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
-        </div>
-        <div class="mb-4">
-            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-            <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
-        </div>
-        @error('description')
-                                            <p class="text-red-500">{{ $message }}</p>
-                                            @enderror
+    @endforeach
 
 
-                                            <div class="mb-4">
-        <label for="offer_id" class="block text-gray-700 text-sm font-bold mb-2">Select an Offer:</label>
-        <select name="offer_id" id="offer_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <option value="">No Offer</option> <!-- Optional: Include a "No Offer" option -->
-            @foreach ($offers as $offer)
-                <option value="{{ $offer->id }}">{{ $offer->name }}</option>
-            @endforeach
-        </select>
-    </div>
+         
 
-
-
-
-
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Add Product
-        </button>
-    </form>
 
 
         </div>
