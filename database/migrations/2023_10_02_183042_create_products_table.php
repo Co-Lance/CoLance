@@ -19,6 +19,9 @@ return new class extends Migration
             $table->integer('quantity');  // Assuming quantity is an integer
             $table->text('description')->nullable();
             $table->timestamps();
+            
+         
+        
         });
     }
 

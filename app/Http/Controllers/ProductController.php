@@ -15,12 +15,21 @@ class ProductController extends Controller
     }
     public function addProduct()
     {
-        return view('product.addProduct');
+        $offers = \App\Models\Offre::all(); // Retrieve all available offers
+        return view('product.addProduct', ['offers' => $offers]);
     }
     public function storeProduct(ProductRequest $request)
     {
         // Validation passed, create and store the product
-        Product::create($request->validated());
+        $product = Product::create($request->validated());
+        if ($request->has('offer_id')) {
+            $offer = \App\Models\Offre::find($request->input('offer_id'));
+            if ($offer) {
+                $product->offre()->associate($offer);
+                $product->save();
+            }
+        }
+        
         return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
 
