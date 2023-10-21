@@ -15,8 +15,9 @@ class ProductController extends Controller
     }
     public function addProduct()
     {
+        $categories = \App\Models\Category::all();
         $offers = \App\Models\Offre::all(); // Retrieve all available offers
-        return view('product.addProduct', ['offers' => $offers]);
+        return view('product.addProduct', ['offers' => $offers], ['categories' => $categories]);
     }
     public function storeProduct(ProductRequest $request)
     {
@@ -29,6 +30,11 @@ class ProductController extends Controller
                 $product->save();
             }
         }
+        if ($request->has('categories')) {
+            // Attach the selected categories to the product
+            $product->categories()->attach($request->input('categories'));
+            $product->save();
+        }
         
         return redirect()->route('products.index')->with('success', 'Product added successfully!');
     }
@@ -40,7 +46,7 @@ class ProductController extends Controller
     if (!$product) {
         return response()->json(['message' => 'Product not found'], 404);
     }
-
+    $product->categories()->detach();
     $product->delete();
 
     // Redirect back or to a desired page after deletion

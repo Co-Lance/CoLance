@@ -78,6 +78,13 @@
                 <p class="mb-3 font-normal text-md text-gray-700">{{ $product->description }}</p>
                 <!-- Assuming you have a URL for a 'Continue' link -->
                 <div>
+                <div class="flex flex-wrap gap-2">
+                    @foreach($product->categories as $category)
+                        <div class="rounded-full px-3 py-1 text-sm font-medium text-white " style="background-color: {{ $category->color }}">
+                            {{ $category->name }}
+                        </div>
+                    @endforeach
+                </div>
                 <a  href="{{ route('products.delete', ['id' => $product->id]) }}" class="mt-auto">
                     <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
                        supprimer

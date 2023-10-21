@@ -85,14 +85,14 @@
                             <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $category->color }}"></span>
                         </td>
                             <td class="text-left py-3 px-4">{{ $category->description }}</td>
-                            <td>   <div>
+                            <td>   <div class="flex flex-row gap-2 mr-4">
                 <a  href="{{ route('categories.delete', ['id' => $category->id]) }}" class="mt-auto">
                     <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
                        supprimer
                         
                     </span></a>
                     <a  href="{{ route('categories.edit', ['id' => $category->id]) }}">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-teal-600 border border-2 border-teal-800 rounded-lg hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-teal-300">
                        modifier
                         <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
