@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
@@ -38,12 +39,16 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 //forum
 Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
 Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forums.show');
-Route::get('/addForum', [ForumController::class, 'create'])->name('forums.create');
-Route::post('/storeForum', [ForumController::class, 'store'])->name('forums.store');
+Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
+Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
 Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
 Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
 Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
 
+//comment
+Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/{id}', [CommentController::class, 'delete'])->name('comments.delete');
 
 
 
