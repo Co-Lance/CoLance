@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();  // Allow for a nullable image
             $table->enum('status', ['done', 'not done'])->default('not done');
             $table->string('description');
+            $table->string('location');
         });
     }
 

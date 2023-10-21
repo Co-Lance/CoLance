@@ -40,8 +40,6 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-                        <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Categories</a>
-                        <a href="{{ url('/categories/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Categorie</a>
                         <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
                         <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
                   
@@ -57,7 +55,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-              Products
+              Reclamations
             </h1>
         </nav>
        
@@ -68,22 +66,20 @@
           
             
           <div class="flex gap-3 flex-wrap justify-center mt-5">
-          @foreach($listproducts as $product)
+          @foreach($listReclamation as $reclamation)
         <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow">
-            <div class="rounded-t-lg w-full h-2/4">
-                <img src="{{ $product->image }}" alt="" class="rounded-t-lg w-full h-full object-cover" />
-            </div>
+          
             <div class="flex flex-col p-5">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $product->name }}</h5>
-                <p class="mb-3 font-normal text-md text-gray-700">{{ $product->description }}</p>
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $reclamation->title }}</h5>
+                <p class="mb-3 font-normal text-md text-gray-700">{{ $reclamation->description }}</p>
                 <!-- Assuming you have a URL for a 'Continue' link -->
                 <div>
-                <a  href="{{ route('products.delete', ['id' => $product->id]) }}" class="mt-auto">
+                <a  href="{{ route('reclamation.delete', ['id' => $reclamation->id]) }}" class="mt-auto">
                     <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
                        supprimer
                         
                     </span></a>
-                    <a  href="{{ route('products.edit', ['id' => $product->id]) }}">
+                    <a  href="{{ route('reclamation.edit', ['id' => $reclamation->id]) }}">
                     <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
                        modifier
                         <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -91,6 +87,11 @@
                         </svg>
                     </span>
                 </a></div>
+                <a href="{{ url('/generate-pdf' , ['id' => $reclamation->id]) }}" class="btn btn-primary"> <span class="inline-flex  items-center px-3 py-2 text-sm font-medium text-center text-green-500 border border-2 border-green-500 rounded-lg hover:bg-green-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300">
+                       download reclamation
+                        
+                    </span></a>
+
             </div>
         </div>
     @endforeach
@@ -107,7 +108,7 @@
 
 
         <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
+            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 

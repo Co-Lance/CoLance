@@ -4,26 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Offre extends Model
+class Request extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'name',
-        'image',
+        'Created_at',
         'status',
-        'location',
-        'description',
-
     ];
-    public function Product()
+    public function Offre()
     {
-        return $this->hasMany(Product::class);
+        return $this->belongsTo(Offre::class);
 
     }
-
-
-
 }

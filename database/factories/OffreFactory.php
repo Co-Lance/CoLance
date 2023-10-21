@@ -19,8 +19,9 @@ class OffreFactory extends Factory
         return [
             'name' => $this->faker->name,
             'image' => $this->faker->imageUrl(),
-            'description' => $this->faker->name,
+            'description' => $this->faker->paragraph(3,true),
             'status' => $this->faker->randomElement(['done', 'not done']),
+            'location'=> $this->faker->city,
 
             //
         ];
