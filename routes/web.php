@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ReclamationController;
 
 use App\Http\Controllers\OffreController;
 
@@ -44,3 +45,10 @@ Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edi
 Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
 
 
+//Recclamation
+Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
+Route::get('/addReclamation', [ReclamationController::class, 'addReclamation']);
+Route::post('/storeReclamation', [ReclamationController::class, 'storeReclamation'])->name('reclamation.store');
+Route::get('/reclamation/delete/{id}', [ReclamationController::class, 'delete'])->name('reclamation.delete');
+Route::get('/reclamation/edit/{id}', [ReclamationController::class, 'edit'])->name('reclamation.edit');
+Route::put('/reclamation/edit/mod/{id}', [ReclamationController::class, 'update'])->name('reclamation.update');
