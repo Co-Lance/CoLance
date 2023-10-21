@@ -33,6 +33,11 @@ Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name(
 Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/edit/mod/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/storeCategory', [CategoryController::class, 'storeCategory'])->name('products.store');
+Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
+Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');
 
 
 
