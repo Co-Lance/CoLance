@@ -27,4 +27,14 @@ class OffreRequest extends FormRequest
             'description' => 'required|string',
         ];
     }
+    public  function  messages()
+    {
+        return [
+            'name.required' => 'A name is required',
+            'name.max' => 'A name is max',
+            'image.required' => 'A image is required',
+            'image.url' => 'A image is url',
+            'description.required' => 'A description is required',
+        ] ;
+    }
 }
