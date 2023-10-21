@@ -72,15 +72,27 @@
         @csrf
         <div class="mb-4">
             <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Reclamtion Title:</label>
-            <input type="text" name="title" id="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="title" id="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
         </div>
+        @error('title')
+
+        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+{{ $message}}</div>
+
+@enderror
         <div class="mb-4">
             <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-            <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+            <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" ></textarea>
         </div>
+        @error('description')
+
+<div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+{{ $message}}</div>
+
+@enderror
         <div class="mb-4">
     <label for="product" class="block text-gray-700 text-sm font-bold mb-2">Product:</label>
-    <select name="product_id" id="product_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+    <select name="product_id" id="product_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
         @foreach($products as $product)
             <option value="{{ $product->id }}">{{ $product->name }}</option>
         @endforeach
@@ -88,17 +100,36 @@
 </div>
         <div class="mb-4">
             <label for="user" class="block text-gray-700 text-sm font-bold mb-2">Your Name:</label>
-            <input type="text" name="user" id="user" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="user" id="user" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
         </div>
+        
+        @error('user')
+
+
+<div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+{{ $message}}</div>
+
+@enderror
         <div class="mb-4">
             <label for="type" class="block text-gray-700 text-sm font-bold mb-2">type:</label>
-            <input type="text" name="type" id="type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="type" id="type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
         </div>
+        @error('type')
+
+<div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+{{ $message}}</div>
+
+@enderror
         <div class="mb-4">
             <label for="contact" class="block text-gray-700 text-sm font-bold mb-2">how we can contact you:</label>
-            <input type="text" name="contact" id="contact" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            <input type="text" name="contact" id="contact" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" >
         </div>
-      
+        @error('contact')
+
+<div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+{{ $message}}</div>
+
+@enderror
      
         <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
             Add Reclamation
