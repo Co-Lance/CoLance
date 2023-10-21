@@ -16,4 +16,8 @@ class Product extends Model
         'quantity',
         'description',
     ];
+    public function offre()
+    {
+        return $this->belongsTo(Offre::class);
+    }
 }
