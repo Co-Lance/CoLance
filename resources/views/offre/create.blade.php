@@ -40,7 +40,7 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
- 
+
                     </div>
                 </div>
             </div>
@@ -94,12 +94,18 @@
                                                 type="text"
                                                 placeholder="First Name"
                                             />
+                                            @error('name')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <div class="mb-4">
                                             <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">
                                                 Image
                                             </label>
                                             <input type="text" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                            @error('image')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -111,8 +117,10 @@
                                             name="description"
                                             id="description"
                                             class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                        >
-                                         </textarea>
+                                        ></textarea>
+                                        @error('description')
+                                        <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
                                     </div>
 
                                     <div class="mb-6 text-center">
@@ -139,7 +147,7 @@
 
 
         <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+            <p>&copy; <?php echo date('Y'); ?>Copyrights TDS <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 

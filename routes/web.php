@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OffreController;
+use App\Http\Controllers\RequestController;
 
 
 /*
@@ -44,5 +45,10 @@ Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre')
 Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
 Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
 Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
+//requests
+Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer'])->name('requests.addrequest');
+
+
+
 
 
