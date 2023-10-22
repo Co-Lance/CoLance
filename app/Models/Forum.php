@@ -9,10 +9,18 @@ class Forum extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'user_name', 'comments'];
+    protected $fillable = ['title', 'description', 'comments'];
 
+    /**
+     * Get the user that owns the forum.
+     */
+
+
+    /**
+     * Get the comments for the forum.
+     */
     public function comments()
-{
-    return $this->hasMany(Comment::class);
-}
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

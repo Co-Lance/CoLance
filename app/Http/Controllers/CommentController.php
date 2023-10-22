@@ -17,7 +17,7 @@ class CommentController extends Controller
         }
 
         // Check if the current user is the owner of the comment
-        if ($comment->user_name !== Auth::user()->name) {
+        if ($comment->user_id !== Auth::id()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
@@ -30,7 +30,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
 
         // Check if the current user is the owner of the comment
-        if ($comment->user_name !== Auth::user()->name) {
+        if ($comment->user_id !== Auth::id()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 
@@ -50,7 +50,7 @@ class CommentController extends Controller
         }
 
         // Check if the current user is the owner of the comment
-        if ($comment->user_name !== Auth::user()->name) {
+        if ($comment->user_id !== Auth::id()) {
             return response()->json(['message' => 'Unauthorized'], 401);
         }
 

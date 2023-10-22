@@ -8,10 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_name', 'content'];
+    protected $fillable = ['content'];
 
     public function forum()
     {
         return $this->belongsTo(Forum::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

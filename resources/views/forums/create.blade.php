@@ -10,19 +10,15 @@
 <body class="bg-gradient-to-r from-green-700 to-black">
     <div class="flex justify-center items-center h-screen">
         <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
-            <div
-                class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden text-4xl font-bold text-center mb-4 text-darkgreen">
-                <div
-                    class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden text-4xl font-bold text-center mb-4 text-darkgreen">
-                    <a href="/">
-                        <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
-                            alt="Logo" style="width: 150px">
-                    </a>
-                    Create Forum
-                </div>
+            <div class="flex justify-center items-center mt-5 mb-4">
+                <a href="/">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
+                        alt="Logo" style="width: 150px">
+                </a>
+                <h1 class="text-4xl font-bold text-center mb-4 text-darkgreen">Create Forum</h1>
             </div>
             <a href="{{ route('forums.index') }}"
-                class="bg-green-600 hover:bg-green-800 text-white py-2 px-4  mb-4 inline-block  rounded-full mx-auto">Back</a>
+                class="bg-green-600 hover:bg-green-800 text-white py-2 px-4 mb-4 inline-block rounded-full mx-auto">Back</a>
 
             @if(session('success'))
             <div class="bg-green-500 text-white px-4 py-2 mb-4">{{ session('success') }}</div>
@@ -76,9 +72,12 @@
         </div>
     </div>
 
+    <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+        <p>&copy; <?php echo date('Y'); ?> Copyrights TDS
+            <span class="ml-2">&trade;</span>
+        </p>
+    </div>
+
 </body>
-<div class="bg-white mt-auto p-3 text-gray-600 text-center">
-    <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
-</div>
 
 </html>

@@ -38,7 +38,6 @@ Route::get('/categories', [CategoryController::class, 'index'])->name('categorie
 
 //forum
 Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
-Route::get('/forums/{forum}', [ForumController::class, 'show'])->name('forums.show');
 Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
 Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
 Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');

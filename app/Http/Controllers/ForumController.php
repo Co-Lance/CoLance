@@ -25,51 +25,47 @@ class ForumController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'comments' => 'required',
         ]);
 
         $forum = new Forum();
         $forum->title = $request->input('title');
         $forum->description = $request->input('description');
-        $forum->user_name = Auth::user()->name; // Set the current user's name
+        $forum->comments = $request->input('comments');
+        // $forum->user_name = Auth::user()->name; // Set the current user's name
         $forum->save();
 
         return redirect()->route('forums.index')->with('success', 'Forum has been created successfully.');
     }
 
-    public function show(Forum $forum)
-    {
-        return view('forums.show', compact('forum'));
-    }
+
+
 
     public function edit($id)
     {
         $forum = Forum::find($id);
 
-        if (!$forum) {
-            return response()->json(['message' => 'Forum not found'], 404);
-        }
-
-        // Check if the current user is the owner of the forum
-        if ($forum->user_name !== Auth::user()->name) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
-
-        return view('forums.edit', compact('forum'));
+    if (!$forum) {
+        return response()->json(['message' => 'forum not found'], 404);
     }
 
-    public function update(Request $request, $id)
+    // You can load a view to edit the forum and pass the forum data to the view
+    return view('forum.edit')->with('forum', $forum);
+    }
+
+    public function update(Request $request, Forum $forum)
     {
-        // Find the forum by its ID
-        $forum = Forum::findOrFail($id);
+        // $this->authorize('update', $forum);
 
-        // Check if the current user is the owner of the forum
-        if ($forum->user_name !== Auth::user()->name) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'comments' => 'required',
+        ]);
 
-        // Update the forum with the new data
         $forum->title = $request->input('title');
         $forum->description = $request->input('description');
+        $forum->comments = $request->input('comments');
         $forum->save();
 
         return redirect()->route('forums.index')->with('success', 'Forum updated successfully!');
@@ -83,10 +79,10 @@ class ForumController extends Controller
             return response()->json(['message' => 'Forum not found'], 404);
         }
 
-        // Check if the current user is the owner of the forum
-        if ($forum->user_name !== Auth::user()->name) {
-            return response()->json(['message' => 'Unauthorized'], 401);
-        }
+        // // Check if the current user is the owner of the forum
+        // if ($forum->user_name !== Auth::user()->name) {
+        //     return response()->json(['message' => 'Unauthorized'], 401);
+        // }
 
         $forum->delete();
 
