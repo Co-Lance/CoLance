@@ -103,7 +103,7 @@ class ForumController extends Controller
 
         $comment = new Comment();
         $comment->user_name = Auth::user()->name; // Set the current user's name
-        $comment->content = $request->input('content');
+        // $comment->content = $request->input('content');
         $forum->comments()->save($comment);
 
         return redirect()->back()->with('success', 'Comment added successfully');

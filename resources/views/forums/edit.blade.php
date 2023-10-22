@@ -51,15 +51,6 @@
                     @enderror
                 </div>
                 <div>
-                    <label class="block mb-2 font-semibold text-gray-700" for="user_name">User Name:</label>
-                    <input type="text" name="user_name" id="user_name"
-                        class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
-                        placeholder="User Name" value="{{ $forum->user_name }}">
-                    @error('user_name')
-                    <div class="text-red-500 mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div>
                     <label class="block mb-2 font-semibold text-gray-700" for="comments">Comments:</label>
                     <textarea name="comments" id="comments"
                         class="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"

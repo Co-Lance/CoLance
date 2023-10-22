@@ -49,6 +49,14 @@
                             <a href="{{route('createoffre')}}"
                                 class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Create
                                 Offer</a>
+                            <a href="{{ url('/reclamation') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
+                            <a href="{{ url('/addReclamation') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
+                                Reclamation</a>
+                            <a href="{{ url('/forums') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Forums</a>
+
 
                         </div>
                     </div>
@@ -66,67 +74,82 @@
                     Forums
                 </h1>
             </nav>
+            <div class="flex flex-col flex-grow p-4 items-center ">
 
-            <!-- Content -->
-            <div class="w-5/6">
-                <div class="container mx-auto mt-2 px-4 py-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <div class="items-center justify-center mt-5 -ml-2">
-                            <a href="/">
-                                <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
-                                    alt="Logo" style="width: 150px">
-                            </a>
+                <!-- Content for each tab goes here -->
+
+
+                <div class="flex gap-3 flex-wrap justify-center mt-5">
+                    <a href="{{ route('forums.create') }}"
+                        class="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded-md">Create Forum</a>
+
+
+
+                    <td class="py-4 px-6 text-center">
+                        @foreach($forums as $forum)
+                        <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow">
+
+                            <div class="rounded-t-lg w-full h-2/4">
+                                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $forum->title }}
+                                </h5>
+                            </div>
+                            <div class="flex flex-col p-5">
+                                <p class="mb-3 font-normal text-md text-gray-700">{{ $forum->description }}</p>
+                                <p class="mb-3 font-normal text-md text-gray-700">{{ $forum->comments }}</p>
+                                >
+                                <div>
+                                    <a href="{{ route('forums.delete', ['id' => $forum->id]) }}" class="mt-auto">
+                                        <span
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500  border-2 border-red-500 rounded-lg hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                                            supprimer
+
+                                        </span></a>
+                                    <a href="{{ route('forums.edit', ['id' => $forum->id]) }}">
+                                        <span
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-500  border-2 border-blue-500 rounded-lg hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                            modifier
+                                            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                    <a href="{{ route('forums.comment', ['id' => $forum->id]) }}">
+                                        <span
+                                            class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-amber-500  border-2 border-amber-700 rounded-lg hover:bg-amber-800 hover:text-white focus:ring-4 focus:outline-none focus:ring-amber-300">
+                                            Comments
+                                            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd"></path>
+                                            </svg>
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <h2 class="text-4xl font-bold text-gray-800 mb-2">Welcome to the Co-Lance Forums</h2>
-                        <a href="{{ route('forums.create') }}"
-                            class="bg-green-500 hover:bg-green-800 text-white py-2 px-4 rounded-md">Create Forum</a>
-                    </div>
+                        @endforeach
 
-                    @if(session('success'))
-                    <div class="bg-green-900 text-white px-4 py-2 mb-4 shadow-md rounded">{{ session('success') }}</div>
-                    @error('name')
-                    <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                    @enderror
-                    @endif
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full bg-white shadow-md rounded">
-                            <thead>
-                                <tr class="bg-gradient-to-r from-green-700 to-black text-white">
-                                    <th class="py-3 px-6 text-left">Title</th>
-                                    <th class="py-3 px-6 text-left">Description</th>
-                                    <th class="py-3 px-6 text-left">User Name</th>
-                                    <th class="py-3 px-6 text-left">Comments</th>
-                                    <th class="py-3 px-6 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($forums as $forum)
-                                <tr>
-                                    <td class="py-4 px-6">{{ $forum->title }}</td>
-                                    <td class="py-4 px-6">{{ $forum->description }}</td>
-                                    <td class="py-4 px-6">{{ $forum->user_name }}</td>
-                                    <td class="py-4 px-6">{{ $forum->comments }}</td>
-                                    <td class="py-4 px-6 text-center">
 
-                                        <a href="{{ route('forums.edit', $forum->id) }}"
-                                            class="text-yellow-600 hover:text-yellow-800 mx-2">Edit</a>
-                                        <form action="{{ route('forums.delete', $forum->id) }}" method="POST"
-                                            class="inline">
-                                            @csrf
-                                            @method('GET')
-                                            <button type="submit"
-                                                class="text-red-600 hover:text-red-800 mx-2">Delete</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
+
+
+
                 </div>
             </div>
+
+
+
+
+            <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+                <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
+            </div>
         </div>
+
+    </div>
 </body>
 
 </html>

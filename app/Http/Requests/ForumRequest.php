@@ -24,7 +24,6 @@ class ForumRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'user_name' => 'required|string|max:255',
             'comments' => 'required|string',
         ];
     }

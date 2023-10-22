@@ -44,14 +44,7 @@
                         <div class="text-red-500 mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-                    <div>
-                        <label class="block mb-1 font-semibold text-white" for="user_name">User Name:</label>
-                        <input type="text" name="user_name" id="user_name"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="User Name">
-                        @error('user_name')
-                        <div class="text-red-500 mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
+
                     <div>
                         <label class="block mb-1 font-semibold text-white" for="comments">Comments:</label>
                         <textarea name="comments" id="comments"
