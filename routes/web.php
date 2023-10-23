@@ -46,6 +46,7 @@ Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->
 
 
 //offres
+Route::get('/offres', [OffreController::class, 'index'])->name('offres');
 Route::get('/offre/create',[OffreController::class,'create'])->name('createoffre');
 Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre');
 Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
@@ -85,6 +86,6 @@ Route::group(['middleware' => ['role:admin']], function() {
 });
 
 Route::group(['middleware' => ['role:user']], function() {
-    Route::get('/offres', [OffreController::class, 'index'])->name('offres');
+
 
 });

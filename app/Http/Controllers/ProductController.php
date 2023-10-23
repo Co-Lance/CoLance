@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Models\Product;
@@ -11,13 +11,20 @@ class ProductController extends Controller
     public function index()
     {
         $listproducts = \App\Models\Product::all();
-        return view('product.index',compact('listproducts'));
+        $qrCodes = [];
+    
+        foreach ($listproducts as $product) {
+            $productName = $product->name;
+            $quantity = $product->quantity;
+            $categoryNames = $product->categories->pluck('name')->implode(', ');
+            $qrCodeContent = "$productName\nQuantity: $quantity\nCategories: $categoryNames";
+            $qrCode = QrCode::size(125)->generate($qrCodeContent);
+            $qrCodes[$product->id] = $qrCode;
+        }
+    
+        return view('product.index', compact('listproducts', 'qrCodes'));
     }
-    public function addProduct()
-    {
-        $offers = \App\Models\Offre::all(); // Retrieve all available offers
-        return view('product.addProduct', ['offers' => $offers]);
-    }
+   
     public function storeProduct(ProductRequest $request)
     {
         // Validation passed, create and store the product
@@ -28,6 +35,11 @@ class ProductController extends Controller
                 $product->offre()->associate($offer);
                 $product->save();
             }
+        }
+        if ($request->has('categories')) {
+            // Attach the selected categories to the product
+            $product->categories()->attach($request->input('categories'));
+            $product->save();
         }
         
         return redirect()->route('products.index')->with('success', 'Product added successfully!');
@@ -40,14 +52,22 @@ class ProductController extends Controller
     if (!$product) {
         return response()->json(['message' => 'Product not found'], 404);
     }
-
+    $product->categories()->detach();
     $product->delete();
 
     // Redirect back or to a desired page after deletion
     return redirect()->back()->with('success', 'Product deleted successfully');
 }
+public function addProduct()
+{
+    $categories = \App\Models\Category::all();
+    $offers = \App\Models\Offre::all(); // Retrieve all available offers
+    return view('product.addProduct', ['offers' => $offers], ['categories' => $categories]);
+}
+
     public function edit($id)
 {
+    $categories = \App\Models\Category::all();
     $product = Product::find($id);
 
     if (!$product) {
@@ -55,7 +75,7 @@ class ProductController extends Controller
     }
 
     // You can load a view to edit the product and pass the product data to the view
-    return view('product.edit')->with('product', $product);
+    return view('product.edit',['product' => $product], ['categories' => $categories]);
 }
 public function update(Request $request, $id)
 {
@@ -70,7 +90,7 @@ public function update(Request $request, $id)
         'quantity' => $request->input('quantity'),
         'description' => $request->input('description'),
     ]);
-
+    $product->categories()->sync($request->input('categories'));
     // Redirect to the product details page or any other appropriate route
     return redirect()->route('products.index')->with('success', 'Product added successfully!');
 }

@@ -66,9 +66,9 @@
 
 
     <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-semibold mb-6">Categories</h1>
-        <div class="bg-white shadow-md rounded my-6">
-            <table class="min-w-full bg-white">
+        <h1 class="text-2xl font-semibold ml-4 mb-6">Categories</h1>
+        <div class="bg-white shadow-md  rounded-lg my-6 mx-4">
+            <table class="min-w-full bg-white  rounded-xl">
                 <thead>
                     <tr>
                         <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Name</th>
@@ -85,14 +85,14 @@
                             <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $category->color }}"></span>
                         </td>
                             <td class="text-left py-3 px-4">{{ $category->description }}</td>
-                            <td>   <div>
+                            <td>   <div class="flex flex-row gap-2 mr-4">
                 <a  href="{{ route('categories.delete', ['id' => $category->id]) }}" class="mt-auto">
                     <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
                        supprimer
                         
                     </span></a>
                     <a  href="{{ route('categories.edit', ['id' => $category->id]) }}">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-teal-600 border border-2 border-teal-800 rounded-lg hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-teal-300">
                        modifier
                         <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
@@ -112,7 +112,7 @@
 
 
 
-        <div class="mt-auto p-3 text-gray-600 text-center w-full">
+    <div class="mt-auto p-3 text-gray-600 text-center w-full">
             <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>
