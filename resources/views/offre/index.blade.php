@@ -16,15 +16,7 @@
 
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
 {{--{{lena }}--}}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.css" />
-
-    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.4/dist/L.Control.Locate.min.css" />
 </head>
 
 <body>
@@ -52,10 +44,10 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-                        <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Categories</a>
-                        <a href="{{ url('/categories/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Categorie</a>
                         <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
                         <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
+                        <a href="{{ route('requests.index') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Requests</a>
+
                     </div>
                 </div>
             </div>
@@ -70,7 +62,7 @@
             <h1 class="text-2xl font-bold text-blue-950">
                 Offers
             </h1>
-            <div id="map" style="height: 600px;width: 600px"></div>
+
         </nav>
 
 
@@ -122,7 +114,7 @@
                             <div>
 
                                 <div class="flex flex-wrap m-4 ">
-                                    <form method="post" action="{{ route('offers.destroy', $offre->id) }}" >
+                                    <form method="post" action="{{ route('offers.destroy',$offre->id) }}" >
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">Delete</button>
@@ -130,9 +122,9 @@
                                     <form method="post" action="{{ route('offers.edit', $offre->id) }}" >
                                         @csrf
                                         @method('Get')
-                                        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 mx-5">Edit</button>
+                                        <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 mx-5">Edit</button>
                                     </form>
-                                    <form method="post" action="{{route('requests.create')}}">
+                                    <form method="POST" action="{{route('request.create',$offre->id)}}">
                                         @csrf
                                         @method('Get')
                                         <button  type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">Request</button>
@@ -160,40 +152,4 @@
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 
-<script>
-    var currentMarker = null;
-    // Map initialization
-    var map = L.map('map').setView([28.3949, 84.1240], 8);
-    map.invalidateSize();
-    //osm layer
-    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    });
-    $('#myModal').on('shown.bs.modal', function() {
-        map.invalidateSize(true);
-    });
-    osm.addTo(map);
 
-
-
-    L.control.locate().addTo(map);
-    const popup = L.popup()
-        .setLatLng([51.513, -0.09])
-        .setContent('I am a standalone popup.')
-        .openOn(map);
-
-    function onMapClick(e) {
-        if (currentMarker) {
-            map.removeLayer(currentMarker);
-        }
-         currentMarker = L.marker(e.latlng).addTo(map);
-
-        popup
-            .setLatLng(e.latlng)
-            .setContent(`You clicked the map at ${e.latlng.toString()}`)
-            .openOn(map);
-    }
-
-    map.on('click', onMapClick);
-
-</script>
