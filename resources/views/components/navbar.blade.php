@@ -20,8 +20,13 @@
                         </a>
                         <a href=""
                             class="ml-4 px-3 py-2 rounded-md text-md font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
+                            Inventory
+                        </a>
+                        <a href=""
+                            class="ml-4 px-3 py-2 rounded-md text-md font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
                             About
                         </a>
+
                     </div>
                 </div>
             </div>
@@ -116,6 +121,10 @@
             </a>
             <a href=""
                 class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
+                Inventory
+            </a>
+            <a href=""
+                class="mt-1 block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-white hover:bg-gray-700 focus:outline-none focus:text-white focus:bg-gray-700">
                 About
             </a>
         </div>
@@ -133,9 +142,9 @@
                     <div class="mt-1 text-sm font-medium leading-none text-gray-400">
                         tom@example.com
                     </div>
-                    
-                   
-                  
+
+
+
                 </div>
             </div>
             <div class="mt-3 px-2">

@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 
 use App\Http\Controllers\OffreController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ContractController;
 
 
 /*
@@ -43,4 +45,17 @@ Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('of
 Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
 Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
 
+//Inventory
+// Route::get('/inventories', 'InventoryController@index');
 
+Route::get('/inventories', [InventoryController::class, 'index'])->name('inventory.index');
+Route::get('/inventory/create',[InventoryController::class,'create'])->name('inventory.create');
+Route::post('/inventory/store',[InventoryController::class,'store'])->name('storeinventory');
+Route::delete('/inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('inventories.destroy');
+
+Route::get('/inventory/edit/{id}',[InventoryController::class,'edit'])->name('inventories.edit');
+Route::put('/inventory/put/{id}',[InventoryController::class,'put'])->name('inventories.put');
+
+// Route::get('/inventories', [InventoryController::class, 'index'])->name('inventories');
+
+Route::resource('/contract', ContractController::class);
