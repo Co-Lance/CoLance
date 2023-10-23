@@ -55,7 +55,8 @@ Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put')
 //requests
 Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer'])->name('requests.addrequest');
 Route::get('/requests',[RequestController::class,'index'])->name('requests.index');
-
+Route::get('/request/accept/{id}',[RequestController::class,'acceptRequest'])->name('requests.accept');
+Route::get('/request/delete/{id}',[RequestController::class,'deleteRequest'])->name('requests.delete');
 
 
 

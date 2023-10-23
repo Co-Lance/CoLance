@@ -96,10 +96,10 @@
                                     {{ $request->offre->location }}
                                 </td>
                                 <td class="px-8 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</a>
+                                    <a href="{{ route('requests.accept', ['id' => $request->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</a>
                                 </td>
                                 <td class="px-8 py-4 text-right">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Refuse</a>
+                                    <a href="{{ route('requests.delete', ['id' => $request->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Refuse</a>
                                 </td>
                             </tr>
                         @endforeach
