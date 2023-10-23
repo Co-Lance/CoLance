@@ -29,4 +29,23 @@ class RequestController extends Controller
 
    return redirect()->route('offres')->with('success', 'Request created for the offer.');
     }
+    public function index()
+    {
+        $listrequests = \App\Models\Request::where('status', 'pending')->get();
+        return view('request.index',compact('listrequests','listrequests'));
+    }
+    public function acceptRequest($id)
+    {
+        $request = \App\Models\Request::find($id);
+        $request->status = 'accepted';
+        $request->save();
+        return redirect()->route('requests.index')->with('success', 'Request accepted successfully!');
+    }
+    public function deleteRequest($id)
+    {
+        $request = \App\Models\Request::find($id);
+        $request->status = 'refused';
+        $request->save();
+        return redirect()->route('requests.index')->with('success', 'Request rejected successfully!');
+    }
 }
