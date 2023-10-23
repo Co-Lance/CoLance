@@ -11,10 +11,7 @@
     <div class="flex justify-center items-center h-screen">
         <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-6">
             <div class="flex justify-center items-center mt-5 mb-4">
-                <a href="/">
-                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
-                        alt="Logo" style="width: 150px">
-                </a>
+
                 <h1 class="text-4xl font-bold text-center mb-4 text-darkgreen">Add Comment</h1>
             </div>
             <a href="{{ route('comments.index') }}"
@@ -24,7 +21,7 @@
             <div class="bg-green-500 text-white px-4 py-2 mb-4">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('comments.store')}}" method="POST">
+            <form action="{{ route('comments.store', ['forumId' => $forum->id]) }}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
 
@@ -54,7 +51,6 @@
             <span class="ml-2">&trade;</span>
         </p>
     </d iv>
-
-</body>
+    < </body>
 
 </html>

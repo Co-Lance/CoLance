@@ -10,12 +10,19 @@ class CommentController extends Controller
 {
     public function index()
     {
-        $forums = Comment::all();
-        return view('comments.index', compact('comments'));
+        $forums = Forum::all();
+        $comments = Comment::all();
+        return view('comments.index', compact('comments', 'forums'));
     }
-    public function create()
+    public function create($forumId)
     {
-        return view('comments.create');
+        $forum = Forum::find($forumId);
+
+        if (!$forum) {
+            return response()->json(['message' => 'Forum not found'], 404);
+        }
+
+        return view('comments.create', ['forum' => $forum]);
     }
 
     public function store(Request $request, $forumId)
@@ -64,7 +71,7 @@ class CommentController extends Controller
         $comment->content = $request->input('content');
         $comment->save();
 
-        return redirect()->route('forums.show', $comment->forum_id)->with('success', 'Comment updated successfully');
+        return redirect()->route('comments.index', $comment->forum_id)->with('success', 'Comment updated successfully');
     }
 
     public function delete($id)

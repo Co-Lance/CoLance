@@ -47,11 +47,11 @@ Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('f
 
 //comment
 Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-Route::get('/comments/create', [CommentController::class, 'create'])->name('comments.create');
+Route::get('/comments/create/{forumId}', [CommentController::class, 'create'])->name('comments.create');
 Route::post('/comments/{forumId}', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
-Route::delete('/comments/{id}', [CommentController::class, 'delete'])->name('comments.delete');
+Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
 
 
 
@@ -60,11 +60,11 @@ Route::delete('/comments/{id}', [CommentController::class, 'delete'])->name('com
 
 //offres
 Route::get('/offres', [OffreController::class, 'index'])->name('offres');
-Route::get('/offre/create',[OffreController::class,'create'])->name('createoffre');
-Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre');
-Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
-Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
-Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
+Route::get('/offre/create', [OffreController::class, 'create'])->name('createoffre');
+Route::post('/offre/store', [OffreController::class, 'store'])->name('storeoffre');
+Route::delete('/offre/delete/{id}', [OffreController::class, 'destroy'])->name('offers.destroy');
+Route::get('/offre/edit/{id}', [OffreController::class, 'edit'])->name('offers.edit');
+Route::put('/offre/put/{id}', [OffreController::class, 'put'])->name('offers.put');
 
 
 //Recclamation

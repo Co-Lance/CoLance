@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ForumRequest extends FormRequest
+class CreateForumRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,6 +24,15 @@ class ForumRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'description' => 'required|string',
+        ];
+    }
+    public function messages():array
+    {
+        return [
+            'title.required' => 'The title field is required.',
+            'title.string' => 'The title must be a string.',
+            'description.required' => 'The description field is required.',
+            'description.string' => 'The description must be a string.',
         ];
     }
 }

@@ -32,7 +32,11 @@
                         <input type="text" name="title" id="title"
                             class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Title">
                         @error('title')
-                        <div class="text-red-500 mt-1">{{ $message }}</div>
+
+                        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                            {{ $message}}
+                        </div>
+
                         @enderror
                     </div>
                     <div>
@@ -41,39 +45,34 @@
                             class="w-full border border-gray-300 rounded-md px-3 py-2"
                             placeholder="Description"></textarea>
                         @error('description')
-                        <div class="text-red-500 mt-1">{{ $message }}</div>
+
+                        <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                            {{ $message}}
+                        </div>
+
                         @enderror
                     </div>
-                    <div class="mb-4">
-                        <label for="ccomments" class="block text-gray-700 text-sm font-bold mb-2">Comments:</label>
-                        <textarea name="comments" id="comments"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Description">
-                            @foreach ($forum->comments as $comment)
 
-                            <div value="{{ $comment->id }}">{{ $comment->content }}</div>
-                            @endforeach
-                        </textarea>
-                    </div>
+                </div>
 
-
-                    <div>
-                        <button type="submit"
-                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-20 rounded-full block mx-auto">
-                            Create
-                        </button>
-                    </div>
+                <div>
+                    <button type="submit"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-20 rounded-full block mx-auto">
+                        Create
+                    </button>
                 </div>
             </form>
         </div>
     </div>
 
-
-    <di v class="bg-white mt-auto p-3 text-gray-600 text-center">
-
+    <div class="bg-white mt-auto p-3 text-gray-600 text-center">
         <p>&copy; <?php echo date('Y'); ?> Copyrights TDS
+
+
+
             <span class="ml-2">&trade;</span>
         </p>
-    </di>
+    </div>
 
 </body>
 

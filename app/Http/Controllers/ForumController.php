@@ -16,7 +16,8 @@ class ForumController extends Controller
 
     public function create()
     {
-        return view('forums.create');
+        $comments = Comment::all();
+        return view('forums.create', ['comments' => $comments]);
     }
 
     public function store(Request $request)
@@ -48,17 +49,17 @@ class ForumController extends Controller
     public function edit($id)
     {
         $forum = Forum::with('comments')->find($id);
+        $comments = Comment::all();
 
         if (!$forum) {
             return response()->json(['message' => 'Forum not found'], 404);
         }
 
-        return view('forums.edit')->with('forum', $forum);
+        return view('forums.edit',['forum'=>$forum],['comments' => $comments]);
     }
 
     public function update(Request $request, $id)
     {
-        // Find the forum by its ID
         $forum = Forum::findOrFail($id);
 
         // Update the forum with the new data
