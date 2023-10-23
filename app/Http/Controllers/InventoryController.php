@@ -18,6 +18,7 @@ class InventoryController extends Controller
     public function create()
     {
         return view('inventory.create');
+
     }
 
 
@@ -33,8 +34,10 @@ class InventoryController extends Controller
             'InventoryCategory' => 'required',
             'InventorySupplier' => 'required',
         ]);
-        echo $request->InventoryName;
-        Inventory::create($request->validated());
+
+        // Create an Inventory model using the validated data
+        Inventory::create($data);
+
         return redirect()->route('inventories')->with('success', 'Inventory item added successfully!');
     }
 
@@ -50,7 +53,7 @@ class InventoryController extends Controller
     public function edit($id)
     {
         $inventory = Inventory::findOrFail($id);
-        return view('inventory.editinventory', compact('inventory'));
+        return view('inventory.edit', compact('inventory'));
     }
 
     public function show($id)

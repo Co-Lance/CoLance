@@ -46,16 +46,15 @@ Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edi
 Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
 
 //Inventory
-// Route::get('/inventories', 'InventoryController@index');
+// Route::get('/inventories', 'InventoryController@create')->name('inventory.create');
 
 Route::get('/inventories', [InventoryController::class, 'index'])->name('inventory.index');
-Route::get('/inventory/create',[InventoryController::class,'create'])->name('inventory.create');
+Route::get('/inventory/create',[InventoryController::class,'create'])->name('addinventory');
 Route::post('/inventory/store',[InventoryController::class,'store'])->name('storeinventory');
 Route::delete('/inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('inventories.destroy');
-
-Route::get('/inventory/edit/{id}',[InventoryController::class,'edit'])->name('inventories.edit');
+Route::get('/inventory/edit/{id}',[InventoryController::class,'edit'])->name('inventory.edit');
 Route::put('/inventory/put/{id}',[InventoryController::class,'put'])->name('inventories.put');
-
 // Route::get('/inventories', [InventoryController::class, 'index'])->name('inventories');
+
 
 Route::resource('/contract', ContractController::class);
