@@ -24,12 +24,13 @@
             <h2 class="text-md text-red-600 font-medium">Admin</h2>
             <p class="text-gray-300 text-sm">Foulen ben foulen</p>
         </div>
+
         <div class="p-4">
-            <div class="space-y-2">
-                <a href="{{ route('inventory.index') }}" class="menu-link">Inventory</a>
-                <a href="{{ url('/inventories') }}" class="menu-link">Inventories</a>
-                <a href="{{ url('/inventory/create') }}" class="menu-link">Add Inventory</a>
-                <a href="{{ route('addinventory') }}" class="menu-link">Create Inventory</a>
+            <div id="menu" class="flex flex-col space-y-2">
+                <a href="{{ route('inventory.index') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"">Inventory</a>
+                <a href="{{ url('/inventories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"">Inventories</a>
+                <a href="{{ url('/inventory/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"">Add Inventory</a>
+                <a href="{{ route('addinventory') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"">Create Inventory</a>
             </div>
         </div>
         <a href="/auth" class="text-sm mt-auto text-center font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out p-4 block">

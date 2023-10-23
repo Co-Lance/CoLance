@@ -60,25 +60,24 @@
 
         <div class="flex flex-col flex-grow p-4 items-center ">
 
-            <!-- Content for each tab goes here -->
 
             <div class="flex gap-4 flex-wrap w-2/5 mt-5">
-                <!-- Replace "Product" with "Inventory" -->
-                <p>Inventory Name: {{ $inventory->name }}</p>
+
+                <p class=" mb-5">Inventory Name: <b> {{ $inventory->InventoryName }} </b></p>
 
                 <!-- Edit Inventory Form -->
-                <form action="{{ route('inventoryedit', ['id' => $inventory->id]) }}" method="post" class="w-full max-w-sm">
+                <form action="{{ route('inventories.put', ['id' => $inventory->id]) }}" method="post" class="w-full max-w-sm">
                     @csrf
                     @method('PUT')
 
                     <div class="mb-4">
                         <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Inventory Name:</label>
-                        <input type="text" name="name" id="name" value="{{ $inventory->name }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <input type="text" name="InventoryName" id="name" value="{{ $inventory->InventoryName }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
                     <div class="mb-4">
                         <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Inventory Description:</label>
-                        <textarea name="description" id="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>{{ $inventory->description }}</textarea>
+                        <textarea name="InventoryDescription" id="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required >{{ $inventory->InventoryDescription }}</textarea>
                     </div>
 
                     <div class="mb-4">
@@ -88,25 +87,25 @@
 
                     <div class="mb-4">
                         <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Inventory Location:</label>
-                        <input type="text" name="location" id="location" value="{{ $inventory->location }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <input type="text" name="InventoryLocation" id="location" value="{{ $inventory->InventoryLocation }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
 
                     <div class="mb-4">
                         <label for="archive_date" class="block text-gray-700 text-sm font-bold mb-2">Inventory Archive Date:</label>
-                        <input type="date" name="archive_date" id="archive_date" value="{{ $inventory->archive_date }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <input type="date" name="InventoryArchiveDate" id="archive_date" value="{{ $inventory->InventoryArchiveDate }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
 
                     <div class="mb-4">
                         <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Inventory Category:</label>
-                        <input type="text" name="category" id="category" value="{{ $inventory->category }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <input type="text" name="InventoryCategory" id="category" value="{{ $inventory->InventoryCategory }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
 
                     <div class="mb-4">
                         <label for="supplier" class="block text-gray-700 text-sm font-bold mb-2">Inventory Supplier:</label>
-                        <input type="text" name="supplier" id="supplier" value="{{ $inventory->supplier }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        <input type="text" name="InventorySupplier" id="supplier" value="{{ $inventory->InventorySupplier }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
                     </div>
 
                     <button type="submit" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

@@ -78,7 +78,7 @@ class InventoryController extends Controller
         ]);
 
         // Redirect to the inventory item details page or any other appropriate route
-        return redirect()->route('inventories')->with('success', 'Inventory item updated successfully!');
+        return redirect()->route('inventory.index')->with('success', 'Inventory item updated successfully!');
     }
 
     // public function update(InventoryRequest $request, $id)
