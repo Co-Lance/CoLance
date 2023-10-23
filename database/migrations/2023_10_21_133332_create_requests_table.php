@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id();
             $table->enum('status', ['accepted', 'refused','pending'])->default('pending');
+            $table->string('latitude')->nullable(); // Define a nullable latitude
+            $table->string('longitude')->nullable(); // Define a nullable longitude
             $table->unsignedBigInteger('offre_id')->nullable(); // Define a nullable foreign key
             $table->foreign('offre_id')->references('id')->on('offres');
             $table->timestamps();

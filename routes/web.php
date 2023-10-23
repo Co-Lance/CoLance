@@ -57,8 +57,8 @@ Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer
 Route::get('/requests',[RequestController::class,'index'])->name('requests.index');
 Route::get('/request/accept/{id}',[RequestController::class,'acceptRequest'])->name('requests.accept');
 Route::get('/request/delete/{id}',[RequestController::class,'deleteRequest'])->name('requests.delete');
-
-
+Route::get('/request/create',[RequestController::class,'createrequest'])->name('requests.create');
+Route::post('/request/store',[RequestController::class,'store'])->name('requests.store');
 
 //Recclamation
 Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
@@ -68,3 +68,24 @@ Route::get('/reclamation/delete/{id}', [ReclamationController::class, 'delete'])
 Route::get('/reclamation/edit/{id}', [ReclamationController::class, 'edit'])->name('reclamation.edit');
 Route::put('/reclamation/edit/mod/{id}', [ReclamationController::class, 'update'])->name('reclamation.update');
 Route::get('/generate-pdf/{id}', [PDFController::class, 'generatePDF']);
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+
+});
+
+Route::group(['middleware' => ['role:admin']], function() {
+
+
+});
+
+Route::group(['middleware' => ['role:user']], function() {
+
+
+});
