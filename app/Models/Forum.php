@@ -12,19 +12,10 @@ class Forum extends Model
     protected $fillable = ['title', 'description'];
 
     /**
-     * Get the user that owns the forum.
-     */
-
-
-    /**
      * Get the comments for the forum.
      */
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
-    // public function user()
-    // {
-    //     return $this->belongsTo(User::class);
-    // }
 }

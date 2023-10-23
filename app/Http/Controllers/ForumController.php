@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Forum;
 use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ForumController extends Controller
 {
@@ -38,9 +37,8 @@ class ForumController extends Controller
 
             foreach ($commentsData as $commentData) {
                 $comment = new Comment();
-                $comment->content = $commentData['content'];
-                $comment->forum_id = $forum->id;
-                $comment->save();
+                $comment->content = $commentData;
+                $forum->comments()->save($comment);
             }
         }
 
@@ -49,13 +47,12 @@ class ForumController extends Controller
 
     public function edit($id)
     {
-        $forum = Forum::find($id);
+        $forum = Forum::with('comments')->find($id);
 
         if (!$forum) {
             return response()->json(['message' => 'Forum not found'], 404);
         }
 
-        // You can load a view to edit the forum and pass the forum data to the view
         return view('forums.edit')->with('forum', $forum);
     }
 
