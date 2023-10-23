@@ -91,3 +91,5 @@ class InventoryController extends Controller
     //     return redirect()->route('inventories')->with('success', 'Inventory item updated successfully!');
     // }
 }
+
+

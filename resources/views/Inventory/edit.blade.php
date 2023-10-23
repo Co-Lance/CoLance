@@ -36,10 +36,11 @@
             <div class="pr-16 mt-10">
                 <div class="p-4">
                 <div id="menu" class="flex flex-col space-y-2">
+
                     <a href="{{ url('/inventories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Inventories</a>
-                        <a href="{{ url('/addInventory') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Inventory</a>
+                        <a href="{{ url('/inventory/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Inventory</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover.bg-red-700 hover:text-white hover.scale-105 rounded-md transition.duration-150 ease-in-out" href="{{url('inventories')}}">My Inventories</a>
-                        <a href="{{route('createinventory')}}" class="text-sm text-white font-medium py-2 px-2 hover.bg-red-700 hover:text-white hover.scale-105 rounded-md transition.duration-150 ease-in-out" >Create Inventory</a>
+                        <a href="{{route('addinventory')}}" class="text-sm text-white font-medium py-2 px-2 hover.bg-red-700 hover:text-white hover.scale-105 rounded-md transition.duration-150 ease-in-out" >Create Inventory</a>
                     </div>
                 </div>
             </div>
@@ -66,7 +67,7 @@
                 <p>Inventory Name: {{ $inventory->name }}</p>
 
                 <!-- Edit Inventory Form -->
-                <form action="{{ route('inventories.edit', ['id' => $inventory->id]) }}" method="post" class="w-full max-w-sm">
+                <form action="{{ route('inventoryedit', ['id' => $inventory->id]) }}" method="post" class="w-full max-w-sm">
                     @csrf
                     @method('PUT')
 

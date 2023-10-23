@@ -52,7 +52,7 @@ Route::get('/inventories', [InventoryController::class, 'index'])->name('invento
 Route::get('/inventory/create',[InventoryController::class,'create'])->name('addinventory');
 Route::post('/inventory/store',[InventoryController::class,'store'])->name('storeinventory');
 Route::delete('/inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('inventories.destroy');
-Route::get('/inventory/edit/{id}',[InventoryController::class,'edit'])->name('inventory.edit');
+Route::get('/inventory/edit/{id}',[InventoryController::class,'edit'])->name('inventoryedit');
 Route::put('/inventory/put/{id}',[InventoryController::class,'put'])->name('inventories.put');
 // Route::get('/inventories', [InventoryController::class, 'index'])->name('inventories');
 
