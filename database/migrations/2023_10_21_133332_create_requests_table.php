@@ -17,11 +17,8 @@ return new class extends Migration
             $table->string('latitude')->nullable(); // Define a nullable latitude
             $table->string('longitude')->nullable(); // Define a nullable longitude
             $table->unsignedBigInteger('offre_id')->nullable(); // Define a nullable foreign key
-            $table->foreign('offre_id')->references('id')->on('offres');
+            $table->foreign('offre_id')->references('id')->on('offres')->onDelete('cascade');
             $table->timestamps();
-
-
-
         });
     }
 
