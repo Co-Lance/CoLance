@@ -48,4 +48,16 @@ class RequestController extends Controller
         $request->save();
         return redirect()->route('requests.index')->with('success', 'Request rejected successfully!');
     }
+
+    public function createrequest($id)
+    {
+
+        //$offers = \App\Models\Offre::all(); // Retrieve all available offers
+        return view('request.create',['id'=>$id]);
+    }
+    public function store(){
+        $request = new \App\Models\Request();
+        $request->save();
+        return redirect()->route('requests.index')->with('success', 'Request created successfully!');
+    }
 }
