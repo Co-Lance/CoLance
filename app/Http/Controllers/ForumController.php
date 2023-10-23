@@ -50,24 +50,21 @@ class ForumController extends Controller
         return view('forums.edit')->with('forum', $forum);
     }
 
-    public function update(Request $request, Forum $forum)
+    public function update(Request $request, $id)
     {
-        // $this->authorize('update', $forum);
+        // Find the forum by its ID
+        $forum = Forum::findOrFail($id);
 
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'comments' => 'required|array', // Validate that comments is an array
+        // Update the forum with the new data
+        $forum->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            // Update any other fields you want to modify
         ]);
 
-        $forum->title = $request->input('title');
-        $forum->description = $request->input('description');
-        $forum->comments = $request->input('comments');
-        $forum->save();
-
-        return redirect()->route('forums.index')->with('success', 'Forum updated successfully!');
+        // Redirect to the appropriate route after updating the forum
+        return redirect()->route('forums.index', ['id' => $forum->id])->with('success', 'Forum updated successfully!');
     }
-
     public function delete($id)
     {
         $forum = Forum::find($id);

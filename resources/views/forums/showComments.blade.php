@@ -22,13 +22,15 @@
         <div class="flex pb-10 flex-col md:w-4/12 md:h-screen  lg:w-2/12 lg:h-screen w-screen bg-gray-900 shadow-lg">
             <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
                 <a href="/">
-                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
+                        alt="Logo" style="width: 150px">
                 </a>
             </div>
 
             <div class="lg:block md:block mt-4">
                 <div id="profile" class="space-y-3 mt-8">
-                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg" alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg"
+                        alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
                     <div>
                         <h2 class="font-medium text-md md:text-sm text-center text-red-600">Admin</h2>
                         <p class="text-md text-gray-300 text-center">Foulen ben foulen</p>
@@ -37,23 +39,31 @@
                 <div class="pr-16 mt-10">
                     <div class="p-4">
                         <div id="menu" class="flex flex-col space-y-2">
-                            <a href="{{ url('/products') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
-                            <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
+                            <a href="{{ url('/products') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
+                            <a href="{{ url('/addProduct') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
                                 Product</a>
-                            <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
-                            <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Create
+                            <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
+                                href="{{url('offres')}}">My offers</a>
+                            <a href="{{route('createoffre')}}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Create
                                 Offer</a>
-                            <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
-                            <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
+                            <a href="{{ url('/reclamation') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
+                            <a href="{{ url('/addReclamation') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
                                 Reclamation</a>
-                            <a href="{{ url('/forums') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Forums</a>
+                            <a href="{{ url('/forums') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Forums</a>
 
 
                         </div>
                     </div>
                 </div>
             </div>
-            <a href="/auth" class="md:block lg:block text-sm mt-auto text-center -ml-4 font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out">
+            <a href="/auth"
+                class="md:block lg:block text-sm mt-auto text-center -ml-4 font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out">
                 <span>Logout</span>
             </a>
         </div>
@@ -76,9 +86,8 @@
                 @endforeach
 
                 <!-- Add a form to create new comments -->
-                <form action="{{ route('forums.createComment) }}" method="POST">
-                    @csrf
-                    <textarea name="content" rows="3" placeholder="Enter your comment"></textarea>
+                <form action="{{ route('forums.createComment) }}"> @csrf <textarea name="content" rows="3"
+                        placeholder="Enter your comment"></textarea>
                     <button type="submit">Add Comment</button>
                 </form>
 
@@ -86,13 +95,21 @@
                 @foreach ($comments as $comment)
                 <div>
                     <p>{{ $comment->content }}</p>
-                    <a href="{{ route('comments.edit', ['id' => $comment->id]) }}" method="POST">Edit</a>
+                    <form action="{{ route('comments.edit', ['id' => $comment->id]) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit">Edit</button>
+                    </form>
                     <form action="{{ route('comments.destroy', ['id' => $comment->id]) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit">Delete</button>
                     </form>
                 </div>
+
+
+
+
 
 
 

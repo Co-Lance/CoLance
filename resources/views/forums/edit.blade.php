@@ -83,7 +83,6 @@
 
                 <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
 
-                    <p>Title: {{ $forum->title }}</p>
                     <!-- Edit Product Form -->
                     <form action="{{ route('forums.update', ['id' => $forum->id]) }}" method="post"
                         class="w-full max-w-sm">
@@ -92,14 +91,11 @@
                         <!-- Use the PUT method for updating -->
 
                         <div class="mb-4">
-                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
-                            <input type="text" name="name" id="name" value="{{ $forum->comment }}"
+                            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
+                            <textarea name="title" id="title" value="{{ $forum->title }}" rows="3"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
+                                required>{{ $forum->title }}</textarea>
                         </div>
-
-
-
                         <div class="mb-4">
                             <label for="description"
                                 class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
@@ -116,10 +112,15 @@
                         <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Update Forum
+
+
                         </button>
+
+                        <a href="{{ route('forums.index') }}"
+                            class="bg-green-700 hover:bg--900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back
+                            to Forums</a>
                     </form>
 
-                    <a href="{{ route('forums.index') }}">Back to Forums</a>
 
                 </div>
             </div>
