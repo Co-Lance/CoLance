@@ -84,5 +84,12 @@ class ForumController extends Controller
         return redirect()->back()->with('success', 'Forum deleted successfully');
     }
 
+    public function searchByTitle(Request $request)
+    {
+        $searchTerm = $request->input('search');
+        $forums = Forum::searchByTitle($searchTerm);
+
+        return view('forums.search', ['forums' => $forums, 'searchTerm' => $searchTerm]);
+    }
 
 }

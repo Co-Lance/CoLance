@@ -96,18 +96,32 @@
                                 </div>
                                 @endforeach
                             </div>
-                            <div> <a href="{{ route('comments.delete', ['id' => $forum->id]) }}" class="mt-auto"> <span
-                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border-2 border-red-500 rounded-lg hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                            <div>
 
-                                        supprimer </span> </a> <a
-                                    href="{{ route('comments.edit', ['id' => $forum->id]) }}"> <span
+                                <form action="{{ route('comments.delete', ['id' => $forum->id]) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-700 border-2 border-red-700 rounded-lg hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-500">
+                                        supprimer
+                                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </button>
+                                </form>
+                                <a href="{{ route('comments.edit', ['id' => $forum->id]) }}"> <span
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-700 border-2 border-green-700 rounded-lg hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-500">
                                         modifier <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
                                                 d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                                 clip-rule="evenodd"></path>
-                                        </svg> </span> </a>
+                                        </svg> </span>
+                                </a>
+
                                 <a href="{{ route('comments.create', ['forumId' => $forum->id]) }}">
                                     @csrf
                                     <span
@@ -118,8 +132,7 @@
                                         <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd"
-       
-                                         d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                                                 clip-rule="evenodd"></path>
                                         </svg>
                                     </span>

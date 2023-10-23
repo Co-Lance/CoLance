@@ -18,4 +18,8 @@ class Forum extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    public static function searchByTitle($searchTerm)
+    {
+        return self::where('title', 'like', '%' . $searchTerm . '%')->get();
+    }
 }

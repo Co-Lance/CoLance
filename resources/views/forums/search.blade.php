@@ -85,45 +85,30 @@
                     </form>
                 </div>
             </nav>
-            <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh">
-                <nav class="bg-white shadow-lg p-6 mb-10">
-                    <h1 class="text-2xl font-bold text-blue-950">
-                        Search Forums
-                    </h1>
-                    <div class="flex justify-center">
-                        <form action="{{ route('forums.search') }}" method="GET">
-                            <div class="flex items-center">
-                                <input type="text" name="search" placeholder="Search forums by title"
-                                    class="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                                <button type="submit"
-                                    class="px-4 py-2 bg-green-800 text-white rounded-r-md hover:bg-green-900 focus:outline-none focus:bg-green-800">
-                                    Search
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </nav>
-                <div class="flex flex-col flex-grow p-4 items-center">
-                    <!-- Content for search results goes here -->
-                    @if(count($forums) > 0)
-                    <div class="flex gap-3 flex-wrap justify-center mt-5">
-                        @foreach($forums as $forum)
-                        <div class="flex flex-col max-w-xs bg-white border border-gray-200 rounded-lg shadow">
-                            <!-- Forum details -->
-                            <!-- ... -->
-                        </div>
-                        @endforeach
-                    </div>
-                    @else
-                    <p class="text-gray-600">No forums found.</p>
-                    @endif
-                </div>
-                <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-                    <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
-                </div>
+            <div class="flex flex-col flex-grow p-4 items-center">
+                @extends('index.blade.php')
+
+                @section('content')
+                <h1 class="text-2xl font-bold mb-4">Search Results for "{{ $searchTerm }}"</h1>
+
+                @if ($forums->isEmpty())
+                <p>No forums found.</p>
+                @else
+                <ul class="list-disc pl-6">
+                    @foreach ($forums as $forum)
+                    <li>{{ $forum->title }}</li>
+                    @endforeach
+                </ul>
+                @endif
+                @endsection
+            </div>
+            <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+                <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
             </div>
         </div>
+
     </div>
+
 </body>
 
 </html>
