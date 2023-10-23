@@ -8,6 +8,8 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\RequestController;
+
 
 use App\Http\Controllers\PDFController;
 
@@ -34,7 +36,11 @@ Route::get('/products/delete/{id}', [ProductController::class, 'delete'])->name(
 Route::get('/products/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/edit/mod/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
-
+Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+Route::post('/storeCategory', [CategoryController::class, 'storeCategory'])->name('products.store');
+Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
+Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
+Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');
 
 //forum
 Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
@@ -65,6 +71,12 @@ Route::post('/offre/store', [OffreController::class, 'store'])->name('storeoffre
 Route::delete('/offre/delete/{id}', [OffreController::class, 'destroy'])->name('offers.destroy');
 Route::get('/offre/edit/{id}', [OffreController::class, 'edit'])->name('offers.edit');
 Route::put('/offre/put/{id}', [OffreController::class, 'put'])->name('offers.put');
+//requests
+Route::post('/request/add/{id}', [RequestController::class, 'createRequestForOffer'])->name('requests.addrequest');
+Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
+Route::get('/request/accept/{id}', [RequestController::class, 'acceptRequest'])->name('requests.accept');
+Route::get('/request/delete/{id}', [RequestController::class, 'deleteRequest'])->name('requests.delete');
+
 
 
 //Recclamation

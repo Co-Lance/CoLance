@@ -19,6 +19,7 @@ class CategoryFactory extends Factory
         return [
             'name' => $this->faker->word, // Generate a random word as the category name
             'description' => $this->faker->sentence, // Generate a random sentence as the category description
+            'color' => $this->faker->hexcolor, // Generate a random color value
         ];
     }
 }

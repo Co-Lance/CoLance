@@ -24,7 +24,7 @@
                 <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
             </a>
         </div>
-      
+
         <div class="lg:block md:block mt-4">
             <div id="profile" class="space-y-3 mt-8">
                 <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg" alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
@@ -35,13 +35,16 @@
             </div>
             <div class="pr-16 mt-10">
                 <div class="p-4">
-                <div id="menu" class="flex flex-col space-y-2">
-                    <a href="{{ url('/products') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
+                    <div id="menu" class="flex flex-col space-y-2">
+                        <a href="{{ url('/products') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Products</a>
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
                         <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Categories</a>
                         <a href="{{ url('/categories/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Categorie</a>
+                        <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
+                        <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
+
                     </div>
                 </div>
             </div>
@@ -54,65 +57,70 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-            Categories
+                Products
             </h1>
         </nav>
-       
+
 
         <div class="flex flex-col flex-grow p-4 items-center ">
-            
+
             <!-- Content for each tab goes here -->
 
 
-
-    <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-semibold ml-4 mb-6">Categories</h1>
-        <div class="bg-white shadow-md  rounded-lg my-6 mx-4">
-            <table class="min-w-full bg-white  rounded-xl">
-                <thead>
-                    <tr>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Name</th>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">color</th>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Description</th>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($categories as $category)
+            <div class="gap-3 justify-center mt-5">
+                <div class="relative overflow-x-auto shadow-md rounded-lg sm:rounded-lg">
+                    <table class="w-full text-base text-left text-gray-500 dark:text-gray-400">
+                        <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <td class="text-left py-3 px-4">{{ $category->name }}</td>
-                            <td class="text-left py-3 px-4">
-                            <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $category->color }}"></span>
-                        </td>
-                            <td class="text-left py-3 px-4">{{ $category->description }}</td>
-                            <td>   <div class="flex flex-row gap-2 mr-4">
-                <a  href="{{ route('categories.delete', ['id' => $category->id]) }}" class="mt-auto">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
-                       supprimer
-                        
-                    </span></a>
-                    <a  href="{{ route('categories.edit', ['id' => $category->id]) }}">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-teal-600 border border-2 border-teal-800 rounded-lg hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-teal-300">
-                       modifier
-                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                </a></div></td>
+                            <th class="px-4 py-3 sm:px-6 sm:py-4">Request offer</th>
+                            <th class="px-4 py-3 sm:px-6 sm:py-4">Date of Submission</th>
+                            <th class="px-4 py-3 sm:px-6 sm:py-4">User</th>
+                            <th class="px-4 py-3 sm:px-6 sm:py-4">Location</th>
+                            <th class="px-4 py-3 sm:px-6 sm:py-4"><span class="sr-only">Accept</span></th>
+                            <th class="px-4 py-3 sm:px-6 sm:py-4"><span class="sr-only">Refuse</span></th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                        </thead>
+                        <tbody>
+                        @foreach($listrequests as $request)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <th scope="row" class="px-8 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                    {{ $request->offre->name }}
+                                </th>
+                                <td class="px-8 py-4">
+                                    {{ $request->created_at }}
+                                </td>
+                                <td class="px-8 py-4">
+                                    {{ $request->user_name }}
+                                </td>
+                                <td class="px-8 py-4">
+                                    {{ $request->offre->location }}
+                                </td>
+                                <td class="px-8 py-4 text-right">
+                                    <a href="{{ route('requests.accept', ['id' => $request->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</a>
+                                </td>
+                                <td class="px-8 py-4 text-right">
+                                    <a href="{{ route('requests.delete', ['id' => $request->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Refuse</a>
+                                </td>
+                            </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+
+
+            </div>
         </div>
-    </div>
-
-
-  
 
 
 
 
-    <div class="mt-auto p-3 text-gray-600 text-center w-full">
+        <div class="bg-white mt-auto p-3 text-gray-600 text-center">
             <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>

@@ -54,7 +54,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-            Categories
+              update Categories
             </h1>
         </nav>
        
@@ -64,55 +64,52 @@
             <!-- Content for each tab goes here -->
 
 
+            <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
+        
+        <p>Category Name: {{ $category->name }}</p>
+        <!-- Edit Product Form -->
+<form action="{{ route('categories.update', ['id' => $category->id]) }}" method="post" class="w-full max-w-sm">
+  @csrf
+  @method('PUT') <!-- Use the PUT method for updating -->
 
-    <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-semibold ml-4 mb-6">Categories</h1>
-        <div class="bg-white shadow-md  rounded-lg my-6 mx-4">
-            <table class="min-w-full bg-white  rounded-xl">
-                <thead>
-                    <tr>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Name</th>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">color</th>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Description</th>
-                        <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($categories as $category)
-                        <tr>
-                            <td class="text-left py-3 px-4">{{ $category->name }}</td>
-                            <td class="text-left py-3 px-4">
-                            <span class="inline-block w-6 h-6 rounded-full" style="background-color: {{ $category->color }}"></span>
-                        </td>
-                            <td class="text-left py-3 px-4">{{ $category->description }}</td>
-                            <td>   <div class="flex flex-row gap-2 mr-4">
-                <a  href="{{ route('categories.delete', ['id' => $category->id]) }}" class="mt-auto">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
-                       supprimer
-                        
-                    </span></a>
-                    <a  href="{{ route('categories.edit', ['id' => $category->id]) }}">
-                    <span class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-teal-600 border border-2 border-teal-800 rounded-lg hover:bg-black hover:text-white focus:ring-4 focus:outline-none focus:ring-teal-300">
-                       modifier
-                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                    </span>
-                </a></div></td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
+  <div class="mb-4">
+      <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Category Name:</label>
+      <input type="text" name="name" id="name" value="{{ $category->name }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+  </div>
+  
+  
+ 
+  <div class="mb-4">
+      <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+      <textarea name="description" id="description" rows="3" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>{{ $category->description }}</textarea>
+  </div>
+ 
+  <div class="mb-4">
+                    <label for="color" class="block text-gray-700 text-sm font-bold mb-2">Category Color:</label>
+                    <input type="color" value="{{ $category->color }}" name="color" id="color" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                 
+                </div>
+ 
+ 
+ 
+  <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+      Update Category
+  </button>
+</form>
 
+        <a href="{{ route('categories.index') }}">Back to Categories</a>
+
+      </div>
+      </div>
+
+     
 
   
 
 
 
 
-    <div class="mt-auto p-3 text-gray-600 text-center w-full">
+      <div class="mt-auto p-3 text-gray-600 text-center w-full">
             <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>

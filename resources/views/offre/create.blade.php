@@ -40,9 +40,7 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-                        <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
-                        <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
-                  
+
                     </div>
                 </div>
             </div>
@@ -96,12 +94,18 @@
                                                 type="text"
                                                 placeholder="First Name"
                                             />
+                                            @error('name')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                         <div class="mb-4">
                                             <label class="block mb-2 text-sm font-bold text-gray-700" for="lastName">
                                                 Image
                                             </label>
                                             <input type="text" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                                            @error('image')
+                                            <p class="text-red-500">{{ $message }}</p>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="mb-4">
@@ -113,10 +117,37 @@
                                             name="description"
                                             id="description"
                                             class="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                                        >
-                                         </textarea>
+                                        ></textarea>
+                                        @error('description')
+                                        <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
                                     </div>
+                                    <div class="mb-4">
+                                        <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" id="location">Select a location</label>
+                                        <select name="location" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option disabled selected>Choose a location</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city }}">{{ $city }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('location')
+                                        <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
 
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="product_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" id="location">Select a location</label>
+                                        <select name="product_id" id="product_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                            <option disabled selected>Choose a location</option>
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('location')
+                                        <p class="text-red-500">{{ $message }}</p>
+                                        @enderror
+
+                                    </div>
                                     <div class="mb-6 text-center">
                                         <button
                                             class="w-full px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
@@ -141,7 +172,7 @@
 
 
         <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+            <p>&copy; <?php echo date('Y'); ?>Copyrights TDS <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 
