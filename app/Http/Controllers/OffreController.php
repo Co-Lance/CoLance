@@ -10,15 +10,19 @@ use Illuminate\Http\Request;
 class OffreController extends Controller
 {
     public function index(Request $request){
+
         $search = $request->input('search');
 
         if ($search) {
             // If a search term is provided, filter offers by offer name
             $listoffres = Offre::where('name', 'like', '%' . $search . '%')->get();
+
+
         } else {
             // If no search term is provided, retrieve all offers
             $listoffres = Offre::all();
         }
+
 
         return view('offre.index', compact('listoffres'));
     }

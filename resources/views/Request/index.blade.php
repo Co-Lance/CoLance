@@ -69,8 +69,8 @@
 
             <div class="gap-3 justify-center mt-5">
                 <div class="relative overflow-x-auto shadow-md rounded-lg sm:rounded-lg">
-                    <table class="w-full text-base text-left text-gray-500 dark:text-gray-400">
-                        <thead class="text-base text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <table class="w-full text-base text-left text-gray-500">
+                        <thead class="text-base text-gray-700 uppercase bg-gray-50">
                         <tr>
                             <th class="px-4 py-3 sm:px-6 sm:py-4">Request offer</th>
                             <th class="px-4 py-3 sm:px-6 sm:py-4">Date of Submission</th>
@@ -82,8 +82,8 @@
                         </thead>
                         <tbody>
                         @foreach($listrequests as $request)
-                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <th scope="row" class="px-8 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <tr class="bg-white border-b hover:bg-gray-50">
+                                <th scope="row" class="px-8 py-4 font-medium text-gray-900 whitespace-nowrap">
                                     {{ $request->offre->name }}
                                 </th>
                                 <td class="px-8 py-4">
@@ -96,10 +96,10 @@
                                     {{ $request->offre->location }}
                                 </td>
                                 <td class="px-8 py-4 text-right">
-                                    <a href="{{ route('requests.accept', ['id' => $request->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Accept</a>
+                                    <a href="{{ route('requests.accept', ['id' => $request->id]) }}" class="font-medium text-blue-600 hover:underline">Accept</a>
                                 </td>
                                 <td class="px-8 py-4 text-right">
-                                    <a href="{{ route('requests.delete', ['id' => $request->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Refuse</a>
+                                    <a href="{{ route('requests.delete', ['id' => $request->id]) }}" class="font-medium text-blue-600 hover:underline">Refuse</a>
                                 </td>
                             </tr>
                         @endforeach

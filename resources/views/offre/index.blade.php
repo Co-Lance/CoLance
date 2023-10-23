@@ -12,13 +12,25 @@
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+{{--{{lena }}--}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@v0.74.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.4/dist/L.Control.Locate.min.css" />
 </head>
 
 <body>
 <div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
 
-    <div class="flex pb-10 flex-col md:w-6/12 md:h-screen  lg:w-max-lg bg-gray-900 shadow-lg max-w-xs">
+    <div class="flex pb-10 flex-col md:w-2/3 md:h-screen  lg:w-max-lg bg-gray-900 shadow-lg max-w-xs">
         <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
             <a href="/">
                 <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
@@ -58,6 +70,7 @@
             <h1 class="text-2xl font-bold text-blue-950">
                 Offers
             </h1>
+            <div id="map" style="height: 600px;width: 600px"></div>
         </nav>
 
 
@@ -65,20 +78,19 @@
             <form  class="mb-4" method="post" action="{{url('offres')}}">
                 @csrf
                 @method('Get')
-                <input type="text" name="search" placeholder="Search by Offer Name" class="p-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200" />
+                <input  type="text" id="search" name="search" placeholder="Search by Offer Name" class="p-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200" />
                 <button type="submit" class="ml-2 px-3 py-2 bg-green-700 text-white rounded-lg hover:bg-black focus:outline-none focus:ring-4 focus:ring-indigo-300">
                     Search
                 </button>
             </form>
             <!-- Content for each tab goes here -->
 
-
-            <div class="flex gap-3 flex-wrap justify-center mt-5">
+            <div class="flex gap-3 flex-wrap justify-center mt-5 ">
                 @foreach($listoffres as $offre)
                     <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow w-96 h-6/12">
-                        <div class="rounded-t-lg w-full h-2/4">
+
                             <img src="{{ $offre->image }}" alt="" class="rounded-t-lg w-full h-full object-cover max-h-48" />
-                        </div>
+
                         <div class="flex flex-col p-5">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 " >{{ $offre->name }}</h5>
 
@@ -109,7 +121,7 @@
                             </div>
                             <div>
 
-                                <div class="flex flex-wrap m-4">
+                                <div class="flex flex-wrap m-4 ">
                                     <form method="post" action="{{ route('offers.destroy', $offre->id) }}" >
                                         @csrf
                                         @method('DELETE')
@@ -118,35 +130,70 @@
                                     <form method="post" action="{{ route('offers.edit', $offre->id) }}" >
                                         @csrf
                                         @method('Get')
-                                        <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 mx-5">Edit</button>
+                                        <button type="button" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 mx-5">Edit</button>
                                     </form>
-                                    <form method="post"  action="{{route('requests.addrequest',$offre->id)}}">
+                                    <form method="post" action="{{route('requests.create')}}">
                                         @csrf
-
-                                        <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">Request</button>
+                                        @method('Get')
+                                        <button  type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border border-2 border-red-500 rounded-lg hover:bg-red-500 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">Request</button>
                                     </form>
                                 </div>
                                 </div>
                         </div>
                     </div>
                 @endforeach
-
-
-
-
-
-
             </div>
         </div>
-
-
-
 
         <div class="bg-white mt-auto p-3 text-gray-600 text-center">
             <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 
+
+
+
+
 </div>
 </body>
 </html>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+
+<script>
+    var currentMarker = null;
+    // Map initialization
+    var map = L.map('map').setView([28.3949, 84.1240], 8);
+    map.invalidateSize();
+    //osm layer
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    });
+    $('#myModal').on('shown.bs.modal', function() {
+        map.invalidateSize(true);
+    });
+    osm.addTo(map);
+
+
+
+    L.control.locate().addTo(map);
+    const popup = L.popup()
+        .setLatLng([51.513, -0.09])
+        .setContent('I am a standalone popup.')
+        .openOn(map);
+
+    function onMapClick(e) {
+        if (currentMarker) {
+            map.removeLayer(currentMarker);
+        }
+         currentMarker = L.marker(e.latlng).addTo(map);
+
+        popup
+            .setLatLng(e.latlng)
+            .setContent(`You clicked the map at ${e.latlng.toString()}`)
+            .openOn(map);
+    }
+
+    map.on('click', onMapClick);
+
+</script>

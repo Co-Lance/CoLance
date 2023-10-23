@@ -13,6 +13,9 @@ class Request extends Model
     protected $fillable = [
         'Created_at',
         'status',
+        'latitude', // New variable for the marker's latitude
+        'longitude', // New variable for the marker's longitude
+
     ];
     public function Offre()
     {

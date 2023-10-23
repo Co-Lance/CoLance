@@ -123,8 +123,8 @@
                                         @enderror
                                     </div>
                                     <div class="mb-4">
-                                        <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" id="location">Select a location</label>
-                                        <select name="location" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <label for="location" class="block mb-2 text-sm font-medium text-gray-900" id="location">Select a location</label>
+                                        <select name="location" id="location" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                             <option disabled selected>Choose a location</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city }}">{{ $city }}</option>
@@ -136,8 +136,8 @@
 
                                     </div>
                                     <div class="mb-4">
-                                        <label for="product_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" id="location">Select a location</label>
-                                        <select name="product_id" id="product_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <label for="product_id" class="block mb-2 text-sm font-medium text-gray-900" id="location">Select a location</label>
+                                        <select name="product_id" id="product_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                                             <option disabled selected>Choose a location</option>
                                             @foreach ($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
