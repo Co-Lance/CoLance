@@ -23,8 +23,9 @@ class ContractController extends Controller
        public function store(Request $request)
        {
            $input = $request->all();
+           $input['user_id'] = 1;
            Contract::create($input);
-           return redirect('contract')->with('flash_message', 'Contract Addedd!');
+           return redirect('/contract')->with('flash_message', 'Contract Addedd!');
        }
 
 
@@ -54,6 +55,6 @@ class ContractController extends Controller
        public function destroy($id)
        {
            Contract::destroy($id);
-           return redirect('contract')->with('flash_message', 'contract deleted!');
+           return redirect('/contract')->with('flash_message', 'contract deleted!');
        }
    }

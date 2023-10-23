@@ -10,6 +10,8 @@
     <!-- Add your fonts and stylesheets here -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
     <div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
@@ -31,8 +33,8 @@
                 <div class="pr-16 mt-10">
                     <div class="p-4">
                         <div id="menu" class="flex flex-col space-y-2">
-                            <a href="{{ url('/Contracts') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Inventory</a>
-                            <a href="{{ url('/addcontract') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product to inventory</a>
+                            <a href="{{ route('contract.index') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Contract</a>
+                            <a href="{{ route('addcontract') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add new contract</a>
                         </div>
                     </div>
                 </div>
@@ -43,162 +45,48 @@
         </div>
 
         <!-- Content Section -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="card">
-                        <div class="card-header">
+       <!-- component -->
 
-                            @extends('contracts.layout')
+<div class="grid grid-cols-2 gap-4">
 
-                            @section('content')
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h2>CO-Lance</h2>
-                                                </div>
-                                                <div class="card-body">
-                                                    <a href="{{ url('/contract/create') }}" class="btn btn-success btn-sm" title="Add New Contract">
-                                                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                                                    </a>
-                                                    <br/>
-                                                    <br/>
-                                                    <div class="table-responsive">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>#</th>
-                                                                    <th>contract_name</th>
-                                                                    <th>contract_type</th>
-                                                                    <th>contract_status</th>
-                                                                    <th>contract_description</th>
-                                                                    <th>contract_date</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            @foreach($contracts as $item)
-                                                                <tr>
-                                                                    <td>{{ $loop->iteration }}</td>
-                                                                    <td>{{ $item->contract_name }}</td>
-                                                                    <td>{{ $item->contract_type }}</td>
-                                                                    <td>{{ $item->contract_status }}</td>
-                                                                    <td>{{ $item->contract_description }}</td>
-                                                                    <td>{{ $item->contract_date }}</td>
-                                                                    <td>
-                                                                        <a href="{{ url('/contract/' . $item->id) }}" title="View contract">
-                                                                            <button class="btn btn-info btn-sm">
-                                                                                <i class="fa fa-eye" aria-hidden="true"></i> View
-                                                                            </button>
-                                                                        </a>
-                                                                        <a href="{{ url('/contract/' . $item->id . '/edit') }}" title="Edit Contract">
-                                                                            <button class="btn btn-primary btn-sm">
-                                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit
-                                                                            </button>
-                                                                        </a>
-                                                                        <form method="POST" action="{{ url('/contract' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                                            {{ method_field('DELETE') }}
-                                                                            {{ csrf_field() }}
-                                                                            <button type="submit" class="btn btn-danger btn-sm" title="Delete Contract" onclick="return confirm(&quot;Confirm delete?&quot;)">
-                                                                                <i class="fa fa-trash-o" aria-hidden="true"></i> Delete
-                                                                            </button>
-                                                                        </form>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endsection
+    @foreach ($contracts as $contract)
+    @if ($contract->contract_type == "one way exchange")
 
-    <div class="py-20">
-        <div class="container">
-            <div class="mx-auto max-w-4xl sm:text-center">
-                <img src="assets/images/landing/index-21.png" class="w-40 mx-auto" alt="">
-                <h2 class="md:text-5xl text-3xl font-semibold tracking-tight">Contracts</h2>
-                <div class="flex justify-center">
-                    <p class="md:w-1/2 mt-6 text-xl/8 font-medium text-gray-500 dark:text-gray-400">We specialise in organising professional exchnage .</p>
-                </div>
-            </div>
+    <div class="bg-blue-300 w-52 h-72 m-8 static rounded-lg ">
+        <div class="bg-white w-52 h-72 -m-2 hover:m-0 absolute rounded-lg shadow-lg hover:shadow-2xl transition-all duration-150 ease-out hover:ease-in ">
+            <h1 class="m-4 text-2xl font-bold">{{$contract->contract_name}}</h1>
+            <hr class="m-4 rounded-2xl border-t-2">
 
-            <div class="grid lg:grid-cols-3 md:grid-cols-2 grikd-cols-1 gap-6 mt-16">
-                <div>
-                    <div class="p-7 rounded-xl bg-amber-100 dark:bg-neutral-700/70">
-                        <h3 class="text-xl font-semibold mb-7">Electronic exchange</h3>
-                        <p class="font-medium leading-7 text-gray-500 mb-6 dark:text-gray-400">We've designed and built ecommerce experiences that have driven sales.</p>
-                        <a href="#" class="py-3 flex items-center justify-center w-full font-semibold rounded-md bg-white hover:bg-purple-500 hover:text-white transition-all duration-500 dark:bg-neutral-900 dark:hover:bg-purple-500 dark:hover:text-white ">Get Started
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" h-5 w-5 ms-3">
-                                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+            <p class="m-4 text-sm">{{$contract->contract_description}}</p>
 
-                <div>
-                    <div class="p-7 rounded-xl bg-emerald-100 dark:bg-neutral-700/70">
-                        <h3 class="text-xl font-semibold mb-7">Material exchange</h3>
-                        <p class="font-medium leading-7 text-gray-500 mb-6 dark:text-gray-400">The ability to independentiy value an enterprise is an essential tool for marking business and strategic decisions.</p>
-                        <a href="#" class="py-3 flex items-center justify-center w-full font-semibold rounded-md bg-white hover:bg-purple-500 hover:text-white transition-all duration-500 dark:bg-neutral-900 dark:hover:bg-purple-500 dark:hover:text-white ">Get Started
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" h-5 w-5 ms-3">
-                                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
+            <a href="{{ route('contractedit', ['id' => $contract->id]) }}" >
 
-                <div>
-                    <div class="p-7 rounded-xl bg-red-100 dark:bg-neutral-700/70">
-                        <h3 class="text-xl font-semibold mb-7">Home deco exchange </h3>
-                        <p class="font-medium leading-7 text-gray-500 mb-6 dark:text-gray-400">Strategic Business Leader is a trainig course from the Strategic Professional level.</p>
-                        <a href="#" class="py-3 flex items-center justify-center w-full font-semibold rounded-md bg-white hover:bg-purple-500 hover:text-white transition-all duration-500 dark:bg-neutral-900 dark:hover:bg-purple-500 dark:hover:text-white ">Get Started
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" h-5 w-5 ms-3">
-                                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="p-7 rounded-xl bg-red-100 dark:bg-neutral-700/70">
-                        <h3 class="text-xl font-semibold mb-7">vintage exchange</h3>
-                        <p class="font-medium leading-7 text-gray-500 mb-6 dark:text-gray-400">The ability to independently value an enterprise is an essential tool for making business and strategic decisions.</p>
-                        <a href="#" class="py-3 flex items-center justify-center w-full font-semibold rounded-md bg-white hover:bg-purple-500 hover:text-white transition-all duration-500 dark:bg-neutral-900 dark:hover:bg-purple-500 dark:hover:text-white ">Get Started
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" h-5 w-5 ms-3">
-                                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="p-7 rounded-xl bg-amber-100 dark:bg-neutral-700/70">
-                        <h3 class="text-xl font-semibold mb-7">electronic exchange</h3>
-                        <p class="font-medium leading-7 text-gray-500 mb-6 dark:text-gray-400">A unique opportunity to gain guidance and feedback from our expert.</p>
-                        <a href="#" class="py-3 flex items-center justify-center w-full font-semibold rounded-md bg-white hover:bg-purple-500 hover:text-white transition-all duration-500 dark:bg-neutral-900 dark:hover:bg-purple-500 dark:hover:text-white ">Get Started
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" h-5 w-5 ms-3">
-                                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="p-7 rounded-xl bg-emerald-100 dark:bg-neutral-700/70">
-                        <h3 class="text-xl font-semibold mb-7">books exchange</h3>
-                        <p class="font-medium leading-7 text-gray-500 mb-6 dark:text-gray-400">Strategic Business Reporting is a Professional level training course. It covers topics related to advanced financial reporting, inccluding leasing.</p>
-                        <a href="#" class="py-3 flex items-center justify-center w-full font-semibold rounded-md bg-white hover:bg-purple-500 hover:text-white transition-all duration-500 dark:bg-neutral-900 dark:hover:bg-purple-500 dark:hover:text-white ">Get Started
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class=" h-5 w-5 ms-3">
-                                <path fill="currentColor" d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+                <div class="btn btn-success ms-2 me-5"><i class="fa-solid fa-pen-to-square"></i></div>
+                </a>            <a href="{{ route('contract.destroy', ['id' => $contract->id]) }}" >
+            <div class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></div></a>
         </div>
     </div>
+
+    @elseif ($contract->contract_type == "two way exchnage")
+
+    <div class="bg-yellow-300 w-52 h-72 m-8 static rounded-lg ">
+        <div class="bg-white w-52 h-72 m-2 hover:m-0 absolute rounded-lg shadow-lg hover:shadow-2xl transition-all duration-150 ease-out hover:ease-in ">
+            <h1 class="m-4 text-2xl font-bold">{{$contract->contract_name}}</h1>
+            <hr class="m-4 rounded-2xl border-t-2">
+            <p class="m-4 text-sm">{{$contract->contract_description}}</p>
+            <a href="{{ route('contractedit', ['id' => $contract->id]) }}" >
+
+            <div class="btn btn-success ms-2 me-5"><i class="fa-solid fa-pen-to-square"></i></div>
+            </a>
+                <a href="{{ route('contract.destroy', ['id' => $contract->id]) }}" >
+
+            <div class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></div></a>
+        </div>
+    </div>
+
+    @endif
+    @endforeach
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>

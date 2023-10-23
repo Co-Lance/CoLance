@@ -1,4 +1,17 @@
-@extends('Contract.layout')
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Co-Lance</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css">
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+</head>
+
+
+@extends('Contracts.layout')
 @section('content')
 
 <div class="card">
@@ -17,7 +30,6 @@
         <input type="text" name="contract_status" id="contract_status" value="{{$contracts->contract_status}}" class="form-control"></br>
         <input type="submit" value="Update" class="btn btn-success"></br>
     </form>
-
   </div>
 </div>
 

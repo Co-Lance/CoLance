@@ -16,5 +16,6 @@ class Contract extends Model
         'contract_status',
         'contract_description',
         'contract_date',
+        'user_id'
     ];
 }
