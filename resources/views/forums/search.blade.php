@@ -1,32 +1,25 @@
 <!DOCTYPE html>
-<html lang="<?php echo str_replace('_', '-', app()->getLocale()); ?>">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Co-Lance</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2.0/dist/tailwind.min.css">
-
-    <!-- Fonts -->
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.0.2/dist/tailwind.min.css">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
-
-        <div class="flex pb-10 flex-col md:w-4/12 md:h-screen  lg:w-2/12 lg:h-screen w-screen bg-gray-900 shadow-lg">
+        <div class="flex pb-10 flex-col md:w-4/12 md:h-screen lg:w-2/12 lg:h-screen w-screen bg-gray-900 shadow-lg">
             <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
                 <a href="/">
                     <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
                         alt="Logo" style="width: 150px">
                 </a>
             </div>
-
             <div class="lg:block md:block mt-4">
                 <div id="profile" class="space-y-3 mt-8">
                     <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg"
@@ -45,8 +38,8 @@
                                 class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
                                 Product</a>
                             <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out"
-                                href="{{url('offres')}}">My offers</a>
-                            <a href="{{route('createoffre')}}"
+                                href="{{ url('offres') }}">My offers</a>
+                            <a href="{{ route('createoffre') }}"
                                 class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Create
                                 Offer</a>
                             <a href="{{ url('/reclamation') }}"
@@ -56,8 +49,6 @@
                                 Reclamation</a>
                             <a href="{{ url('/forums') }}"
                                 class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Forums</a>
-
-
                         </div>
                     </div>
                 </div>
@@ -68,47 +59,96 @@
             </a>
         </div>
         <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh">
-            <nav class="bg-white shadow-lg p-6 mb-10">
+            <nav class="bg-white shadow-lg p-6 mb-10 flex justify-between">
                 <h1 class="text-2xl font-bold text-blue-950">
                     Forums
                 </h1>
-                <div class="flex justify-center">
-                    <form action="{{ route('forums.search') }}" method="GET">
-                        <div class="flex items-center">
-                            <input type="text" name="search" placeholder="Search forums by title"
-                                class="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-                            <button type="submit"
-                                class="px-4 py-2 bg-green-800 text-white rounded-r-md hover:bg-green-900 focus:outline-none focus:bg-green-800">
-                                Search
-                            </button>
-                        </div>
+                <div class="flex items-center flex-grow justify-center">
+                    <form action="{{ route('forums.search') }}" method="GET" class="flex">
+                        <input type="text" name="search" placeholder="Search forums by title"
+                            class="px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
+                        <button type="submit"
+                            class="px-4 py-2 bg-green-800 text-white rounded-r-md hover:bg-green-900 focus:outline-none focus:bg-green-800">
+                            Search
+                        </button>
                     </form>
+                </div>
+                <div class="flex items-center">
+                    <a href="{{ route('forums.index') }}"
+                        class="bg-green-800 hover:bg-green-900 text-white py-2 px-4 mb-4 inline-block">Back to
+                        Forums</a>
                 </div>
             </nav>
             <div class="flex flex-col flex-grow p-4 items-center">
-                @extends('index.blade.php')
-
-                @section('content')
                 <h1 class="text-2xl font-bold mb-4">Search Results for "{{ $searchTerm }}"</h1>
-
                 @if ($forums->isEmpty())
-                <p>No forums found.</p>
+                <p>No forums found. <a href="{{ url('/forums') }}" class="text-blue-500">Back to all forums</a></p>
                 @else
-                <ul class="list-disc pl-6">
-                    @foreach ($forums as $forum)
-                    <li>{{ $forum->title }}</li>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    @foreach($forums as $forum)
+                    <div class="flex flex-col max-w-xs bg-white border border-gray-200 rounded-lg shadow">
+                        <div class="flex justify-center rounded-t-lg w-full h-2/4">
+                            <h5 class="ml-2 mb-2 text-2xl font-bold tracking-tight text-gray-900">
+                                {{ $forum->title }}
+                            </h5>
+                        </div>
+                        <div class="flex flex-col p-5">
+                            <p class="mb-3 font-normal text-md text-gray-700">
+                            <div class="font-bold underline">Description:</div>
+                            {{ $forum->description }}
+                            </p>
+                            <div class="flex flex-wrap gap-1 mt-3 mb-3">
+                                <div class="font-bold underline">Commentaires:</div>
+                                @foreach($forum->comments as $comment)
+                                <div class="rounded-l px-3 py-1 text-sm font-medium mb-1">
+                                    {{ $comment->content }}
+                                </div>
+                                @endforeach
+                            </div>
+                            <div>
+                                <a href="{{ route('forums.delete', ['id' => $forum->id]) }}" class="mt-auto">
+                                    <span
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500 border-2 border-red-500 rounded-lg hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
+                                        supprimer
+                                    </span>
+                                </a>
+                                <a href="{{ route('forums.edit', ['id' => $forum->id]) }}">
+                                    <span
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-500 border-2 border-blue-500 rounded-lg hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                        modifier
+                                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </span>
+                                </a>
+                                <a href="{{ url('/comments') }}" class="mt-2">
+                                    <span
+                                        class="mt-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-500 border-2 border-green-700 rounded-lg hover:bg-lime-800 hover:text-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
+                                        Commenter
+                                        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
+                                            viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"></path>
+                                        </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
-                </ul>
+                </div>
                 @endif
-                @endsection
             </div>
             <div class="bg-white mt-auto p-3 text-gray-600 text-center">
                 <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
             </div>
         </div>
-
     </div>
-
 </body>
 
 </html>
