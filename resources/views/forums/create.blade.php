@@ -44,16 +44,17 @@
                         <div class="text-red-500 mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-
-                    <div>
-                        <label class="block mb-1 font-semibold text-white" for="comments">Comments:</label>
+                    <div class="mb-4">
+                        <label for="categories" class="block text-gray-700 text-sm font-bold mb-2">Comments:</label>
                         <textarea name="comments" id="comments"
-                            class="w-full border border-gray-300 rounded-md px-3 py-2"
-                            placeholder="Comments"></textarea>
-                        @error('comments')
-                        <div class="text-red-500 mt-1">{{ $message }}</div>
-                        @enderror
+                            class="w-full border border-gray-300 rounded-md px-3 py-2" placeholder="Description">
+                            @foreach ($comments as $comment)
+                            <div value="{{ $comment->id }}">{{ $comment->content }}</div>
+                            @endforeach
+                        </textarea>
                     </div>
+
+
                     <div>
                         <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-20 rounded-full block mx-auto">
@@ -65,11 +66,12 @@
         </div>
     </div>
 
-    <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+
+    <di v class="bg-white mt-auto p-3 text-gray-600 text-center">
         <p>&copy; <?php echo date('Y'); ?> Copyrights TDS
             <span class="ml-2">&trade;</span>
         </p>
-    </div>
+    </di>
 
 </body>
 

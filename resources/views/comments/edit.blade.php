@@ -105,8 +105,9 @@
 
                     <button type="submit"
                         class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        <a href="{{ route('forums.showComments') }}">Back to Comments</a>
+                        <a href="{{ route('forums.showComments', ['id' => $forum->id]) }}">Back to Comments</a>
                     </button>
+
 
                 </div>
             </div>

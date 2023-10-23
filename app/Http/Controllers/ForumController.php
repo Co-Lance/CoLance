@@ -25,17 +25,26 @@ class ForumController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'comments' => 'required|array', // Validate that comments is an array
         ]);
 
-        $forum = new Forum();
-        $forum->title = $request->input('title');
-        $forum->description = $request->input('description');
-        $forum->comments = $request->input('comments');
-        // $forum->user_name = Auth::user()->name; // Set the current user's name
-        $forum->save();
+        $forum = Forum::create([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+        ]);
 
-        return redirect()->route('forums.index')->with('success', 'Forum has been created successfully.');
+        // Attach comments to the forum
+        if ($request->has('comments')) {
+            $commentsData = $request->input('comments');
+
+            foreach ($commentsData as $commentData) {
+                $comment = new Comment();
+                $comment->content = $commentData['content'];
+                $comment->forum_id = $forum->id;
+                $comment->save();
+            }
+        }
+
+        return redirect()->route('forums.index')->with('success', 'Forum added successfully!');
     }
 
     public function edit($id)
@@ -56,14 +65,13 @@ class ForumController extends Controller
         $forum = Forum::findOrFail($id);
 
         // Update the forum with the new data
-        $forum->update([
-            'title' => $request->input('title'),
-            'description' => $request->input('description'),
-            // Update any other fields you want to modify
-        ]);
+        $forum->title = $request->input('title');
+        $forum->description = $request->input('description');
+        // Update any other fields you want to modify
+        $forum->save();
 
         // Redirect to the appropriate route after updating the forum
-        return redirect()->route('forums.index', ['id' => $forum->id])->with('success', 'Forum updated successfully!');
+        return redirect()->route('forums.index')->with('success', 'Forum updated successfully!');
     }
     public function delete($id)
     {
@@ -73,53 +81,10 @@ class ForumController extends Controller
             return response()->json(['message' => 'Forum not found'], 404);
         }
 
-        // // Check if the current user is the owner of the forum
-        // if ($forum->user_name !== Auth::user()->name) {
-        //     return response()->json(['message' => 'Unauthorized'], 401);
-        // }
-
         $forum->delete();
 
         return redirect()->back()->with('success', 'Forum deleted successfully');
     }
 
-    public function createComment()
-    {
-        return view('forums.createComment');
-    }
 
-    public function comment(Request $request, $id)
-    {
-        $request->validate([
-            'content' => 'required',
-        ]);
-
-        $forum = Forum::find($id);
-
-        if (!$forum) {
-            return response()->json(['message' => 'Forum not found'], 404);
-        }
-
-        $comment = new Comment();
-        $comment->content = $request->input('content');
-        $forumComments = $forum->comments ?: []; // Retrieve existing comments or initialize an empty array
-        $forumComments[] = $comment->content; // Add the new comment to the array
-        $forum->comments = $forumComments; // Assign the updated comments array back to the forum
-        $forum->save();
-
-        return redirect()->back()->with('success', 'Comment added successfully');
-    }
-
-    public function showComments($id)
-    {
-        $forum = Forum::find($id);
-
-        if (!$forum) {
-            return response()->json(['message' => 'Forum not found'], 404);
-        }
-
-        $comments = $forum->comments;
-
-        return view('forums.showComments')->with('forum', $forum)->with('comments', $comments);
-    }
 }

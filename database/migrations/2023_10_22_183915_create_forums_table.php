@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->json('comments')->nullable(); // Change the column type to JSON and allow null values
             $table->timestamps();
         });
     }

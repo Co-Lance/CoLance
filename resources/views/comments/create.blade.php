@@ -17,19 +17,19 @@
                 </a>
                 <h1 class="text-4xl font-bold text-center mb-4 text-darkgreen">Add Comment</h1>
             </div>
-            <a href="{{ route('forums.index', ['id' => $forum->id]) }}"
+            <a href="{{ route('comments.index') }}"
                 class="bg-green-600 hover:bg-green-800 text-white py-2 px-4 mb-4 inline-block rounded-full mx-auto">Back</a>
 
             @if(session('success'))
             <div class="bg-green-500 text-white px-4 py-2 mb-4">{{ session('success') }}</div>
             @endif
 
-            <form action="{{ route('forums.comment') }}" method="POST">
+            <form action="{{ route('comments.store')}}" method="POST">
                 @csrf
                 <div class="grid grid-cols-1 gap-4">
 
                     <div>
-                        <label class="block mb-1 font-semibold text-white" for="description">Content:</label>
+                        <label class="block mb-1 font-semibold text-white" for="content">Content:</label>
                         <textarea name="content" id="content" class="w-full border border-gray-300 rounded-md px-3 py-2"
                             placeholder="Content"></textarea>
                         @error('content')
@@ -49,11 +49,11 @@
         </div>
     </div>
 
-    <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+    <d class="bg-white mt-auto p-3 text-gray-600 text-center">
         <p>&copy; <?php echo date('Y'); ?> Copyrights TDS
             <span class="ml-2">&trade;</span>
         </p>
-    </div>
+    </d iv>
 
 </body>
 

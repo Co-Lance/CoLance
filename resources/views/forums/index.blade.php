@@ -98,10 +98,14 @@
                                 <p class="mb-3 font-normal text-md text-gray-700">
                                 <div class="font-bold underline">Description:</div> {{ $forum->description }} </p>
                                 <p class="mb-3 font-normal text-md text-gray-700">
-                                <div class="font-bold underline">Comments:</div>
-                                {{ $forum->comments }}
-                                </p>
-                                >
+                                <div class="flex flex-wrap gap-1  mt-3 mb-3">
+                                    @foreach($forum->comments as $comment)
+                                    <div class="rounded-l px-3 py-1 text-sm font-medium">
+                                        {{ $comment->content }}
+                                    </div>
+                                    @endforeach
+                                </div>
+
                                 <div>
                                     <a href="{{ route('forums.delete', ['id' => $forum->id]) }}" class="mt-auto">
                                         <span
@@ -121,10 +125,10 @@
                                             </svg>
                                         </span>
                                     </a>
-                                    <a href="{{ route('forums.showComments', ['id' => $forum->id]) }}" class="mt-2">
+                                    <a href="{{ route('comments.index') }}" class="mt-2">
                                         <span
                                             class="mt-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-lime-500 border-2 border-lime-700 rounded-lg hover:bg-lime-800 hover:text-green-800 focus:ring-4 focus:outline-none focus:ring-lime-300">
-                                            Comments
+                                            Commenter
                                             <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
                                                 viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd"
