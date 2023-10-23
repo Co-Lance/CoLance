@@ -66,9 +66,9 @@
 
 
     <div class="container mx-auto py-6">
-        <h1 class="text-2xl font-semibold mb-6">Categories</h1>
-        <div class="bg-white shadow-md rounded my-6">
-            <table class="min-w-full bg-white">
+        <h1 class="text-2xl font-semibold ml-4 mb-6">Categories</h1>
+        <div class="bg-white shadow-md  rounded-lg my-6 mx-4">
+            <table class="min-w-full bg-white  rounded-xl">
                 <thead>
                     <tr>
                         <th class="w-1/3 text-left py-3 px-4 uppercase tracking-wider font-semibold text-gray-700">Name</th>
@@ -112,7 +112,7 @@
 
 
 
-        <div class="mt-auto p-3 text-gray-600 text-center w-full">
+    <div class="mt-auto p-3 text-gray-600 text-center w-full">
             <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>

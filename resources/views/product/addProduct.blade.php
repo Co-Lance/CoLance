@@ -139,8 +139,8 @@
 
 
 
-        <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+        <div class="mt-auto p-3 text-gray-600 text-center w-full">
+            <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
         </div>
     </div>
 
