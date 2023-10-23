@@ -25,6 +25,7 @@ class OffreRequest extends FormRequest
             'name' => 'required|string|max:255',
             'image' => 'required|url',
             'description' => 'required|string',
+            'location' => 'required',
         ];
     }
     public  function  messages()
@@ -35,6 +36,9 @@ class OffreRequest extends FormRequest
             'image.required' => 'A image is required',
             'image.url' => 'A image is url',
             'description.required' => 'A description is required',
+            'location.required' => 'Please select a location',
+            'product' => 'required',
+
         ] ;
     }
 }

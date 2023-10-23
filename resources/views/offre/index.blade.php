@@ -18,7 +18,7 @@
 <body>
 <div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
 
-    <div class="flex pb-10 flex-col md:w-6/12 md:h-screen  lg:w-4/12 lg:h-screen w-screen bg-gray-900 shadow-lg"  >
+    <div class="flex pb-10 flex-col md:w-6/12 md:h-screen  lg:w-max-lg bg-gray-900 shadow-lg max-w-xs">
         <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
             <a href="/">
                 <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
@@ -40,7 +40,10 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-
+                        <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Categories</a>
+                        <a href="{{ url('/categories/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Categorie</a>
+                        <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
+                        <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
                     </div>
                 </div>
             </div>
@@ -59,21 +62,28 @@
 
 
         <div class="flex flex-col flex-grow p-4 items-center ">
-
+            <form  class="mb-4" method="post" action="{{url('offres')}}">
+                @csrf
+                @method('Get')
+                <input type="text" name="search" placeholder="Search by Offer Name" class="p-2 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200" />
+                <button type="submit" class="ml-2 px-3 py-2 bg-green-700 text-white rounded-lg hover:bg-black focus:outline-none focus:ring-4 focus:ring-indigo-300">
+                    Search
+                </button>
+            </form>
             <!-- Content for each tab goes here -->
 
 
             <div class="flex gap-3 flex-wrap justify-center mt-5">
                 @foreach($listoffres as $offre)
-                    <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow">
+                    <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow w-96 h-6/12">
                         <div class="rounded-t-lg w-full h-2/4">
-                            <img src="{{ $offre->image }}" alt="" class="rounded-t-lg w-full h-full object-cover" />
+                            <img src="{{ $offre->image }}" alt="" class="rounded-t-lg w-full h-full object-cover max-h-48" />
                         </div>
                         <div class="flex flex-col p-5">
-                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">{{ $offre->name }}</h5>
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 " >{{ $offre->name }}</h5>
 
-                            <p class="mb-3 font-normal text-md text-gray-700">{{ $offre->description }}</p>
-                            <p tabindex="0" class="focus:outline-none text-xs text-gray-600 py-5">
+                            <p class="mb-3 font-normal text-md text-gray-700 whitespace-normal">{{ $offre->description }}</p>
+                            <p tabindex="0" class="focus:outline-none text-xs text-gray-600 py-5 px-2">
                                 @php
                                     $now = now();
                                     $createdAt = $offre->created_at;
@@ -91,6 +101,12 @@
                                 @endif
                             </p>
                             <!-- Assuming you have a URL for a 'Continue' link -->
+                            <div class="flex items-center mb-3 text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6c-2.48 0-4.5 2.02-4.5 4.5 0 2.75 4.5 7.5 4.5 7.5s4.5-4.75 4.5-7.5C16.5 8.02 14.48 6 12 6zm0 6a2 2 0 100-4 2 2 0 000 4z" />
+                                </svg>
+                                {{ $offre->location }}
+                            </div>
                             <div>
 
                                 <div class="flex flex-wrap m-4">

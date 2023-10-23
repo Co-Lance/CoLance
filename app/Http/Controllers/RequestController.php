@@ -29,4 +29,9 @@ class RequestController extends Controller
 
    return redirect()->route('offres')->with('success', 'Request created for the offer.');
     }
+    public function index()
+    {
+        $listrequests = \App\Models\Request::where('status', 'pending')->get();
+        return view('request.index',compact('listrequests','listrequests'));
+    }
 }

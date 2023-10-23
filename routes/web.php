@@ -54,7 +54,7 @@ Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edi
 Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
 //requests
 Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer'])->name('requests.addrequest');
-
+Route::get('/requests',[RequestController::class,'index'])->name('requests.index');
 
 
 
