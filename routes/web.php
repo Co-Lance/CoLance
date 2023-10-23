@@ -7,6 +7,8 @@ use App\Http\Controllers\ReclamationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OffreController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ForumController;
+use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\PDFController;
 
@@ -39,7 +41,22 @@ Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->na
 Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');
 
+//forum
+Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
+Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
+Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
+Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
+Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
+Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
+Route::get('/forums/search', [ForumController::class, 'searchByTitle'])->name('forums.search');
 
+//comment
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::get('/comments/create/{forumId}', [CommentController::class, 'create'])->name('comments.create');
+Route::post('/comments/{forumId}', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
 
 
 
@@ -47,18 +64,18 @@ Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->
 
 //offres
 Route::get('/offres', [OffreController::class, 'index'])->name('offres');
-Route::get('/offre/create',[OffreController::class,'create'])->name('createoffre');
-Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre');
-Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
-Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
-Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
+Route::get('/offre/create', [OffreController::class, 'create'])->name('createoffre');
+Route::post('/offre/store', [OffreController::class, 'store'])->name('storeoffre');
+Route::delete('/offre/delete/{id}', [OffreController::class, 'destroy'])->name('offers.destroy');
+Route::get('/offre/edit/{id}', [OffreController::class, 'edit'])->name('offers.edit');
+Route::put('/offre/put/{id}', [OffreController::class, 'put'])->name('offers.put');
 //requests
-Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer'])->name('requests.addrequest');
-Route::get('/requests',[RequestController::class,'index'])->name('requests.index');
-Route::get('/request/accept/{id}',[RequestController::class,'acceptRequest'])->name('requests.accept');
-Route::get('/request/delete/{id}',[RequestController::class,'deleteRequest'])->name('requests.delete');
-Route::get('/request/create',[RequestController::class,'createrequest'])->name('requests.create');
-Route::post('/request/store',[RequestController::class,'store'])->name('requests.store');
+Route::post('/request/add/{id}', [RequestController::class, 'createRequestForOffer'])->name('requests.addrequest');
+Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
+Route::get('/request/accept/{id}', [RequestController::class, 'acceptRequest'])->name('requests.accept');
+Route::get('/request/delete/{id}', [RequestController::class, 'deleteRequest'])->name('requests.delete');
+Route::get('/request/create', [RequestController::class, 'createrequest'])->name('requests.create');
+Route::post('/request/store', [RequestController::class, 'store'])->name('requests.store');
 
 //Recclamation
 Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
@@ -77,15 +94,10 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-
 });
 
-Route::group(['middleware' => ['role:admin']], function() {
-
-
+Route::group(['middleware' => ['role:admin']], function () {
 });
 
-Route::group(['middleware' => ['role:user']], function() {
-
-
+Route::group(['middleware' => ['role:user']], function () {
 });
