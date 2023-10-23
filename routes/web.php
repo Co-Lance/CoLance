@@ -90,7 +90,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             return view('categories.index');
         })->name('categories.index');
     });
-})
+});
 
 Route::group(['middleware' => ['role:admin']], function() {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
