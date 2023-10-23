@@ -71,7 +71,7 @@
         <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
             <nav class="bg-white shadow-lg p-6 mb-10">
                 <h1 class="text-2xl font-bold text-blue-950">
-                    Edit Forum
+                    Edit Comment
                 </h1>
             </nav>
 
@@ -83,43 +83,30 @@
 
                 <div class="flex flex-col gap-4 flex-wrap w-2/5 mt-5">
 
-                    <p>Title: {{ $forum->title }}</p>
                     <!-- Edit Product Form -->
-                    <form action="{{ route('forums.update', ['id' => $forum->id]) }}" method="post"
+                    <form action="{{ route('comments.update', ['id' => $comment->id]) }}" method="post"
                         class="w-full max-w-sm">
                         @csrf
                         @method('PUT')
                         <!-- Use the PUT method for updating -->
 
                         <div class="mb-4">
-                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Title:</label>
-                            <input type="text" name="name" id="name" value="{{ $forum->comment }}"
+                            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Content:</label>
+                            <textarea name="content" id="content" value="{{$comment->content }}" rows="3"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>
+                                required>{{ $comment->content }}</textarea>
                         </div>
 
-
-
-                        <div class="mb-4">
-                            <label for="description"
-                                class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
-                            <textarea name="description" id="description" value="{{ $forum->description }}" rows="3"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>{{ $forum->description }}</textarea>
-                        </div>
-                        <div class="mb-4">
-                            <label for="comments" class=" block text-gray-700 text-sm font-bold mb-2">Comments:</label>
-                            <textarea name="comments" id="comments" value="{{ $forum->comments }}" rows="3"
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                required>{{ $forum->comments }}</textarea>
-                        </div>
                         <button type="submit"
                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                            Update Forum
+                            Update Content
                         </button>
                     </form>
 
-                    <a href="{{ route('forums.index') }}">Back to Forums</a>
+                    <button type="submit"
+                        class="bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        <a href="{{ route('forums.showComments') }}">Back to Comments</a>
+                    </button>
 
                 </div>
             </div>

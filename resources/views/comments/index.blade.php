@@ -70,7 +70,7 @@
         <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh">
             <nav class="bg-white shadow-lg p-6 mb-10">
                 <h1 class="text-2xl font-bold text-blue-950">
-                    Forums
+                    Comments
                 </h1>
 
             </nav>
@@ -78,38 +78,32 @@
 
                 <!-- Content for each tab goes here -->
 
-                <a href="{{ route('forums.create') }}"
-                    class="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded-md flex justify-end">Create
-                    Forum</a>
+                <a href="{{ route('forums.showComments') }}"
+                    class="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded-md flex justify-end">Add Comment
+                </a>
 
                 <div class=" flex gap-3 flex-wrap justify-center mt-5">
 
 
                     <td class="py-4 px-6 text-center">
                         @foreach($forums as $forum)
+                        @foreach($comments as $comment)
                         <div class="flex flex-col  max-w-xs bg-white border border-gray-200 rounded-lg shadow">
 
-                            <div class="flex justify-center rounded-t-lg w-full h-2/4">
-                                <h5 class="ml-2 mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                                    {{ $forum->title }}
-                                </h5>
-                            </div>
                             <div class="flex flex-col p-5">
-                                <p class="mb-3 font-normal text-md text-gray-700">
-                                <div class="font-bold underline">Description:</div> {{ $forum->description }} </p>
-                                <p class="mb-3 font-normal text-md text-gray-700">
+
                                 <div class="font-bold underline">Comments:</div>
                                 {{ $forum->comments }}
                                 </p>
                                 >
                                 <div>
-                                    <a href="{{ route('forums.delete', ['id' => $forum->id]) }}" class="mt-auto">
+                                    <a href="{{ route('comments.delete', ['id' => $comment->id]) }}" class="mt-auto">
                                         <span
                                             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-red-500  border-2 border-red-500 rounded-lg hover:bg-red-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300">
                                             supprimer
 
                                         </span></a>
-                                    <a href="{{ route('forums.edit', ['id' => $forum->id]) }}">
+                                    <a href="{{ route('comment.edit', ['id' => $comment->id]) }}">
                                         <span
                                             class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-blue-500  border-2 border-blue-500 rounded-lg hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300">
                                             modifier
@@ -121,39 +115,30 @@
                                             </svg>
                                         </span>
                                     </a>
-                                    <a href="{{ route('forums.showComments', ['id' => $forum->id]) }}" class="mt-2">
-                                        <span
-                                            class="mt-2 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-lime-500 border-2 border-lime-700 rounded-lg hover:bg-lime-800 hover:text-green-800 focus:ring-4 focus:outline-none focus:ring-lime-300">
-                                            Comments
-                                            <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
-                                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd"
-                                                    d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                                    clip-rule="evenodd"></path>
-                                            </svg>
-                                        </span>
-                                    </a>
+
                                 </div>
                             </div>
-                            @endforeach
-
-
-
-
-
-
                         </div>
-                </div>
+                        @endforeach
+                        endforeach
 
 
 
 
-                <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-                    <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
+
+
                 </div>
             </div>
 
+
+
+
+            <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+                <p>&copy; <?php echo date('Y'); ?> Copyrights CO-SHARE <span class="ml-2">&trade;</span></p>
+            </div>
         </div>
+
+    </div>
 </body>
 
 </html>

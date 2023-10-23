@@ -25,7 +25,7 @@ class ForumController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'comments' => 'required',
+            'comments' => 'required|array', // Validate that comments is an array
         ]);
 
         $forum = new Forum();
@@ -38,19 +38,16 @@ class ForumController extends Controller
         return redirect()->route('forums.index')->with('success', 'Forum has been created successfully.');
     }
 
-
-
-
     public function edit($id)
     {
         $forum = Forum::find($id);
 
-    if (!$forum) {
-        return response()->json(['message' => 'forum not found'], 404);
-    }
+        if (!$forum) {
+            return response()->json(['message' => 'Forum not found'], 404);
+        }
 
-    // You can load a view to edit the forum and pass the forum data to the view
-    return view('forum.edit')->with('forum', $forum);
+        // You can load a view to edit the forum and pass the forum data to the view
+        return view('forums.edit')->with('forum', $forum);
     }
 
     public function update(Request $request, Forum $forum)
@@ -60,7 +57,7 @@ class ForumController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'comments' => 'required',
+            'comments' => 'required|array', // Validate that comments is an array
         ]);
 
         $forum->title = $request->input('title');
@@ -89,6 +86,11 @@ class ForumController extends Controller
         return redirect()->back()->with('success', 'Forum deleted successfully');
     }
 
+    public function createComment()
+    {
+        return view('forums.createComment');
+    }
+
     public function comment(Request $request, $id)
     {
         $request->validate([
@@ -102,10 +104,25 @@ class ForumController extends Controller
         }
 
         $comment = new Comment();
-        $comment->user_name = Auth::user()->name; // Set the current user's name
-        // $comment->content = $request->input('content');
-        $forum->comments()->save($comment);
+        $comment->content = $request->input('content');
+        $forumComments = $forum->comments ?: []; // Retrieve existing comments or initialize an empty array
+        $forumComments[] = $comment->content; // Add the new comment to the array
+        $forum->comments = $forumComments; // Assign the updated comments array back to the forum
+        $forum->save();
 
         return redirect()->back()->with('success', 'Comment added successfully');
+    }
+
+    public function showComments($id)
+    {
+        $forum = Forum::find($id);
+
+        if (!$forum) {
+            return response()->json(['message' => 'Forum not found'], 404);
+        }
+
+        $comments = $forum->comments;
+
+        return view('forums.showComments')->with('forum', $forum)->with('comments', $comments);
     }
 }

@@ -43,7 +43,8 @@ Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
 Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
 Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
 Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
-Route::post('/forums/{id}/comment', [ForumController::class, 'comment'])->name('forums.comment');
+Route::get('/forums/{id}/comments', [ForumController::class, 'showComments'])->name('forums.showComments');
+Route::get('/forums/create-comment', [ForumController::class, 'createComment'])->name('forums.createComment');
 
 //comment
 Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
