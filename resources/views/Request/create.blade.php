@@ -52,10 +52,10 @@
                         <a href="{{ url('/addProduct') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Product</a>
                         <a class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" href="{{url('offres')}}">My offers</a>
                         <a href="{{route('createoffre')}}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out" >Create Offer</a>
-                        <a href="{{ url('/categories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Categories</a>
-                        <a href="{{ url('/categories/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Categorie</a>
                         <a href="{{ url('/reclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Reclamations</a>
                         <a href="{{ url('/addReclamation') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Reclamation</a>
+                        <a href="{{ route('requests.index') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Requests</a>
+
                     </div>
                 </div>
             </div>
@@ -73,15 +73,15 @@
         </nav>
 
 
-        <div class="flex flex-col flex-grow p-4  items-center ">
+        <div class="flex flex-col flex-grow p-4   items-center">
 
             <!-- Content for each tab goes here -->
 
 
             <div class="flex flex-col  flex-wrap  mt-5">
 
-                <div id="map" class="h-96 w-full"></div>
-                <form method="post" action="{{ route('offers.destroy') }}" >
+                <div id="map" class="h-96 md:h-128 lg:h-144 xl:h-160  w-full"></div>
+                <form method="POST" action="{{route('requests.store',$id)}}" id="request-form">
                     @csrf
                     <input type="hidden" name="latitude" id="latitude" value="">
                     <input type="hidden" name="longitude" id="longitude" value="">
@@ -112,6 +112,8 @@ active:border-b-[2px] active:brightness-90 active:translate-y-[2px] " type="subm
 <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.74.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
 <script>
     var currentMarker = null;
+    var longitude ;
+    var latitude  ;
     // Map initialization
     var map = L.map('map').setView([28.3949, 84.1240], 8);
     map.invalidateSize();
@@ -137,6 +139,8 @@ active:border-b-[2px] active:brightness-90 active:translate-y-[2px] " type="subm
             map.removeLayer(currentMarker);
         }
         currentMarker = L.marker(e.latlng).addTo(map);
+        longitude = e.latlng.lng;
+        latitude = e.latlng.lat;
 
         popup
             .setLatLng(e.latlng)
@@ -145,5 +149,10 @@ active:border-b-[2px] active:brightness-90 active:translate-y-[2px] " type="subm
     }
 
     map.on('click', onMapClick);
+    document.getElementById('request-form').addEventListener('submit', function (e) {
+        // Set the longitude and latitude values in the form
+        document.getElementById('longitude').value = longitude;
+        document.getElementById('latitude').value = latitude;
+    });
 
 </script>

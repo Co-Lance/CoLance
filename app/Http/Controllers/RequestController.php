@@ -55,9 +55,18 @@ class RequestController extends Controller
         //$offers = \App\Models\Offre::all(); // Retrieve all available offers
         return view('request.create',['id'=>$id]);
     }
-    public function store(){
-        $request = new \App\Models\Request();
-        $request->save();
+    public function store(Request $request,$id){
+        $offer = Offre::find($id);
+        $newRequest = new \App\Models\Request([
+            'longitude' => $request->input('longitude'),
+            'latitude' => $request->input('latitude'),
+        ]);
+
+        // Associate the offer with the request
+        $newRequest->offre()->associate($offer);
+
+        // Save the request to the database
+        $newRequest->save();
         return redirect()->route('requests.index')->with('success', 'Request created successfully!');
     }
 }

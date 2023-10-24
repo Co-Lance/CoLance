@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
         ]);
       $this->call([
             Offreseeder::class
-          //  Productseeder::class
         ]);
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
