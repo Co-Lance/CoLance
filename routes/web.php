@@ -29,27 +29,6 @@ Route::get('/', function () {
 
 Route::get('/auth', [AuthController::class, 'index']);
 
-//forum
-Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
-Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
-Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
-Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
-Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
-Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
-Route::get('/forums/search', [ForumController::class, 'searchByTitle'])->name('forums.search');
-
-//comment
-Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-Route::get('/comments/create/{forumId}', [CommentController::class, 'create'])->name('comments.create');
-Route::post('/comments/{forumId}', [CommentController::class, 'store'])->name('comments.store');
-Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
-Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
-
-
-
-
-
 
 Route::middleware([
     'auth:sanctum',
@@ -76,20 +55,37 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-Route::group(['middleware' => ['role:admin']], function() {
+Route::group(['middleware' => ['role:admin']], function () {
     Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
     Route::post('/storeCategory', [CategoryController::class, 'storeCategory'])->name('products.store');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');    Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
+    Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');
+    Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
     Route::get('/reclamation/delete/{id}', [ReclamationController::class, 'delete'])->name('reclamation.delete');
     Route::get('/reclamation/edit/{id}', [ReclamationController::class, 'edit'])->name('reclamation.edit');
     Route::get('/generate-pdf/{id}', [PDFController::class, 'generatePDF']);
-
 });
 
-Route::group(['middleware' => ['role:user']], function() {
+//forum
+Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
+Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
+Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
+Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
+Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
+Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
+Route::get('/forums/search', [ForumController::class, 'searchByTitle'])->name('forums.search');
+
+//comment
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::get('/comments/create/{forumId}', [CommentController::class, 'create'])->name('comments.create');
+Route::post('/comments/{forumId}', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
+
+Route::group(['middleware' => ['role:user']], function () {
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/addProduct', [ProductController::class, 'addProduct']);
@@ -108,16 +104,16 @@ Route::group(['middleware' => ['role:user']], function() {
 
     //offres
     Route::get('/offres', [OffreController::class, 'index'])->name('offres');
-    Route::get('/offre/create',[OffreController::class,'create'])->name('createoffre');
-    Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre');
-    Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
-    Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
-    Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
-//requests
-    Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer'])->name('requests.addrequest');
-    Route::get('/requests',[RequestController::class,'index'])->name('requests.index');
-    Route::get('/request/accept/{id}',[RequestController::class,'acceptRequest'])->name('requests.accept');
-    Route::get('/request/delete/{id}',[RequestController::class,'deleteRequest'])->name('requests.delete');
-    Route::get('/request/create/{id}',[RequestController::class,'createrequest'])->name('request.create');
-    Route::post('/request/store/{id}',[RequestController::class,'store'])->name('requests.store');
+    Route::get('/offre/create', [OffreController::class, 'create'])->name('createoffre');
+    Route::post('/offre/store', [OffreController::class, 'store'])->name('storeoffre');
+    Route::delete('/offre/delete/{id}', [OffreController::class, 'destroy'])->name('offers.destroy');
+    Route::get('/offre/edit/{id}', [OffreController::class, 'edit'])->name('offers.edit');
+    Route::put('/offre/put/{id}', [OffreController::class, 'put'])->name('offers.put');
+    //requests
+    Route::post('/request/add/{id}', [RequestController::class, 'createRequestForOffer'])->name('requests.addrequest');
+    Route::get('/requests', [RequestController::class, 'index'])->name('requests.index');
+    Route::get('/request/accept/{id}', [RequestController::class, 'acceptRequest'])->name('requests.accept');
+    Route::get('/request/delete/{id}', [RequestController::class, 'deleteRequest'])->name('requests.delete');
+    Route::get('/request/create/{id}', [RequestController::class, 'createrequest'])->name('request.create');
+    Route::post('/request/store/{id}', [RequestController::class, 'store'])->name('requests.store');
 });
