@@ -53,8 +53,9 @@ class CommentController extends Controller
             return response()->json(['message' => 'Comment not found'], 404);
         }
 
-        return view('comments.edit')->with('comment', $comment);
+        return view('comments.edit', compact('comment')); // Pass the $comment variable to the view.
     }
+
 
     public function update(Request $request, $id)
     {

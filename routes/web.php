@@ -85,7 +85,9 @@ Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('com
 Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
 Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
 
+
 Route::group(['middleware' => ['role:user']], function () {
+Route::group(['middleware' => ['role:user']], function() {
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/addProduct', [ProductController::class, 'addProduct']);
@@ -116,4 +118,19 @@ Route::group(['middleware' => ['role:user']], function () {
     Route::get('/request/delete/{id}', [RequestController::class, 'deleteRequest'])->name('requests.delete');
     Route::get('/request/create/{id}', [RequestController::class, 'createrequest'])->name('request.create');
     Route::post('/request/store/{id}', [RequestController::class, 'store'])->name('requests.store');
+});
+
+    Route::get('/offre/create',[OffreController::class,'create'])->name('createoffre');
+    Route::post('/offre/store',[OffreController::class,'store'])->name('storeoffre');
+    Route::delete('/offre/delete/{id}',[OffreController::class,'destroy'])->name('offers.destroy');
+    Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edit');
+    Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
+    //requests
+    Route::post('/request/add/{id}',[RequestController::class,'createRequestForOffer'])->name('requests.addrequest');
+    Route::get('/requests',[RequestController::class,'index'])->name('requests.index');
+    Route::get('/request/accept/{id}',[RequestController::class,'acceptRequest'])->name('requests.accept');
+    Route::get('/request/delete/{id}',[RequestController::class,'deleteRequest'])->name('requests.delete');
+    Route::get('/request/create/{id}',[RequestController::class,'createrequest'])->name('request.create');
+    Route::post('/request/store/{id}',[RequestController::class,'store'])->name('requests.store');
+
 });

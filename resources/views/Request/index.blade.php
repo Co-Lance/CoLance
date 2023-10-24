@@ -66,7 +66,7 @@
     <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
         <nav class="bg-white shadow-lg p-6 mb-10">
             <h1 class="text-2xl font-bold text-blue-950">
-                Products
+                Create  a  request
             </h1>
         </nav>
 
