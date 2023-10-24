@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,39 +17,45 @@
 </head>
 
 <body>
-<div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
+    <div class="flex flex-col lg:flex-row md:flex-row" style="background-color: #F6F6F6;">
 
-    <div class="flex pb-10 flex-col md:w-4/12 md:h-screen  lg:w-2/12 lg:h-screen w-screen bg-gray-900 shadow-lg"  >
-        <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
-            <a href="/">
-                <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png" alt="Logo" style="width: 150px">
-            </a>
-        </div>
-
-        <div class="lg:block md:block mt-4">
-            <div id="profile" class="space-y-3 mt-8">
-                <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg" alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
-                <div>
-                    <h2 class="font-medium text-md md:text-sm text-center text-red-600">Admin</h2>
-                    <p class="text-md text-gray-300 text-center">Foulen ben foulen</p>
-                </div>
+        <div class="flex pb-10 flex-col md:w-4/12 md:h-screen  lg:w-2/12 lg:h-screen w-screen bg-gray-900 shadow-lg">
+            <div class="items-center justify-center mt-5 -ml-2 lg:flex md:flex hidden">
+                <a href="/">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1695073341/YouTube_Thumbnail_1280x720_px_1_sonpfc.png"
+                        alt="Logo" style="width: 150px">
+                </a>
             </div>
-            <div class="pr-16 mt-10">
-                <div class="p-4">
-                <div id="menu" class="flex flex-col space-y-2">
 
-                    <a href="{{ url('/inventories') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Inventories</a>
-                        <a href="{{ url('/inventory/create') }}" class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add Inventory</a>
-                        <a class="text-sm text-white font-medium py-2 px-2 hover.bg-red-700 hover:text-white hover.scale-105 rounded-md transition.duration-150 ease-in-out" href="{{url('inventories')}}">My Inventories</a>
-                        <a href="{{route('addinventory')}}" class="text-sm text-white font-medium py-2 px-2 hover.bg-red-700 hover:text-white hover.scale-105 rounded-md transition.duration-150 ease-in-out" >Create Inventory</a>
+            <div class="lg:block md:block mt-4">
+                <div id="profile" class="space-y-3 mt-8">
+                    <img src="https://res.cloudinary.com/dnnhnqiym/image/upload/v1694623518/TDS-platform/e1g7fbd5r9ymja0jkxm6.jpg"
+                        alt="Admin picture" class="md:w-16 rounded-full mx-auto" style="width: 120px;">
+                    <div>
+                        <h2 class="font-medium text-md md:text-sm text-center text-red-600">Admin</h2>
+                        <p class="text-md text-gray-300 text-center">Foulen ben foulen</p>
+                    </div>
+                </div>
+                <div class="pr-16 mt-10">
+                    <div class="p-4">
+                        <div id="menu" class="flex flex-col space-y-2">
+
+                            <a href="{{ url('/inventories') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Inventories</a>
+                            <a href="{{ url('/inventory/create') }}"
+                                class="text-sm text-white font-medium py-2 px-2 hover:bg-red-700 hover:text-white hover:scale-105 rounded-md transition duration-150 ease-in-out">Add
+                                Inventory</a>
+                            <a class="text-sm text-white font-medium py-2 px-2 hover.bg-red-700 hover:text-white hover.scale-105 rounded-md transition.duration-150 ease-in-out"
+                                href="{{url('inventories')}}">My Inventories</a>
+                        </div>
                     </div>
                 </div>
             </div>
+            <a href="/auth"
+                class="md:block lg:block text-sm mt-auto text-center -ml-4 font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out">
+                <span>Logout</span>
+            </a>
         </div>
-        <a href="/auth" class="md:block lg:block text-sm mt-auto text-center -ml-4 font-medium text-gray-300 hover:text-red-700 hover:scale-105 rounded-md transition duration-150 ease-in-out">
-            <span>Logout</span>
-        </a>
-    </div>
 
 
         <div class="flex flex-col overflow-y-auto flex-grow" style="height:100vh;">
@@ -58,70 +65,97 @@
                 </h1>
             </nav>
 
-        <div class="flex flex-col flex-grow p-4 items-center ">
+            <div class="flex flex-col flex-grow p-4 items-center ">
 
 
-            <div class="flex gap-4 flex-wrap w-2/5 mt-5">
+                <div class="flex gap-4 flex-wrap w-2/5 mt-5">
 
-                <p class=" mb-5">Inventory Name: <b> {{ $inventory->InventoryName }} </b></p>
+                    <p class=" mb-5">Inventory Name: <b> {{ $inventory->InventoryName }} </b></p>
 
-                <!-- Edit Inventory Form -->
-                <form action="{{ route('inventories.put', ['id' => $inventory->id]) }}" method="post" class="w-full max-w-sm">
-                    @csrf
-                    @method('PUT')
+                    <!-- Edit Inventory Form -->
+                    <form action="{{ route('inventory.update', ['id' => $inventory->id]) }}" method="post"
+                        class="w-full max-w-sm">
+                        @csrf
+                        @method('PUT')
 
-                    <div class="mb-4">
-                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Inventory Name:</label>
-                        <input type="text" name="InventoryName" id="name" value="{{ $inventory->InventoryName }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    </div>
+                        <div class="mb-4">
+                            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Inventory Name:</label>
+                            <input type="text" name="InventoryName" id="name" value="{{ $inventory->InventoryName }}"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Inventory Description:</label>
-                        <textarea name="InventoryDescription" id="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required >{{ $inventory->InventoryDescription }}</textarea>
-                    </div>
+                        <div class="mb-4">
+                            <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Inventory
+                                Description:</label>
+                            <textarea name="InventoryDescription" id="description"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>{{ $inventory->InventoryDescription }}</textarea>
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="file" class="block text-gray-700 text-sm font-bold mb-2">Update File:</label>
-                        <input type="file" name="file" id="file" accept=".jpg, .png, .pdf" class="py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    </div>
+                        <div class="mb-4">
+                            <label for="file" class="block text-gray-700 text-sm font-bold mb-2">Update File:</label>
+                            <input type="file" name="file" id="file" accept=".jpg, .png, .pdf"
+                                class="py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
 
-                    <div class="mb-4">
-                        <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Inventory Location:</label>
-                        <input type="text" name="InventoryLocation" id="location" value="{{ $inventory->InventoryLocation }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    </div>
-
-
-                    <div class="mb-4">
-                        <label for="archive_date" class="block text-gray-700 text-sm font-bold mb-2">Inventory Archive Date:</label>
-                        <input type="date" name="InventoryArchiveDate" id="archive_date" value="{{ $inventory->InventoryArchiveDate }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    </div>
-
-
-                    <div class="mb-4">
-                        <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Inventory Category:</label>
-                        <input type="text" name="InventoryCategory" id="category" value="{{ $inventory->InventoryCategory }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    </div>
+                        <div class="mb-4">
+                            <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Inventory
+                                Location:</label>
+                            <input type="text" name="InventoryLocation" id="location"
+                                value="{{ $inventory->InventoryLocation }}"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>
+                        </div>
 
 
-                    <div class="mb-4">
-                        <label for="supplier" class="block text-gray-700 text-sm font-bold mb-2">Inventory Supplier:</label>
-                        <input type="text" name="InventorySupplier" id="supplier" value="{{ $inventory->InventorySupplier }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
-                    </div>
+                        <div class="mb-4">
+                            <label for="archive_date" class="block text-gray-700 text-sm font-bold mb-2">Inventory
+                                Archive Date:</label>
+                            <input type="date" name="InventoryArchiveDate" id="archive_date"
+                                value="{{ $inventory->InventoryArchiveDate }}"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>
+                        </div>
 
-                    <button type="submit" class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                        Update Inventory
-                    </button>
-                </form>
 
-                <a href="{{ route('inventory.index') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block mt-4">Back to Inventories</a>
+                        <div class="mb-4">
+                            <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Inventory
+                                Category:</label>
+                            <input type="text" name="InventoryCategory" id="category"
+                                value="{{ $inventory->InventoryCategory }}"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>
+                        </div>
 
+
+                        <div class="mb-4">
+                            <label for="supplier" class="block text-gray-700 text-sm font-bold mb-2">Inventory
+                                Supplier:</label>
+                            <input type="text" name="InventorySupplier" id="supplier"
+                                value="{{ $inventory->InventorySupplier }}"
+                                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                required>
+                        </div>
+
+                        <button type="submit"
+                            class="bg-blue-500 hover-bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                            Update Inventory
+                        </button>
+                    </form>
+
+                    <a href="{{ route('inventory.index') }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline inline-block mt-4">Back
+                        to Inventories</a>
+
+                </div>
+
+
+                <div class="bg-white mt-auto p-3 text-gray-600 text-center">
+                    <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
+                </div>
             </div>
-
-
-        <div class="bg-white mt-auto p-3 text-gray-600 text-center">
-            <p>&copy; <?php echo date('Y'); ?> Copyrights TDS <span class="ml-2">&trade;</span></p>
         </div>
-    </div>
-</div>
 </body>
+
 </html>

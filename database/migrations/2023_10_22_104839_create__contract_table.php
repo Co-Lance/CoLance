@@ -20,6 +20,10 @@ return new class extends Migration
             $table->string('contract_description');
             $table->string('contract_date');
             $table->timestamps();
+
+            $table->unsignedBigInteger('inventory_id'); // Define the foreign key column
+            $table->foreign('inventory_id')->references('id')->on('inventories')->onDelete('cascade'); // Define the foreign key constraint
+
         });
     }
 

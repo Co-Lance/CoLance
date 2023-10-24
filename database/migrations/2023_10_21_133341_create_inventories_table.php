@@ -20,8 +20,11 @@ return new class extends Migration
             $table->string('InventoryCategory');
             $table->string('InventorySupplier');
             $table->timestamps(); // Created_at and updated_at timestamps
+            $table->unsignedBigInteger('contract_id'); // Define the foreign key column
+            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade'); // Define the foreign key constraint
+
         });
-        
+
     }
 
     /**

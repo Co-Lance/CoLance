@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InventoryRequest;
@@ -18,27 +17,16 @@ class InventoryController extends Controller
     public function create()
     {
         return view('inventory.create');
-
     }
-
-
-
 
     public function store(InventoryRequest $request)
     {
-        $data = $request->validate([
-            'InventoryName' => 'required',
-            'InventoryDescription' => 'required',
-            'InventoryLocation' => 'required',
-            'InventoryArchiveDate' => 'required',
-            'InventoryCategory' => 'required',
-            'InventorySupplier' => 'required',
-        ]);
+        $data = $request->validated();
 
         // Create an Inventory model using the validated data
         Inventory::create($data);
 
-        return redirect()->route('inventories')->with('success', 'Inventory item added successfully!');
+        return redirect()->route('inventory.index')->with('success', 'Inventory item added successfully!');
     }
 
     public function destroy($id)
@@ -62,34 +50,24 @@ class InventoryController extends Controller
         return view('inventory.showinventory', compact('inventory'));
     }
 
-    public function put(Request $request, $id)
+    public function update(Request $request, $id)
     {
         $inventory = Inventory::findOrFail($id);
 
-        // Update the inventory item with the new data
-        $inventory->update([
-            'InventoryName' => $request->input('InventoryName'),
-            'InventoryDescription' => $request->input('InventoryDescription'),
-            'InventoryLocation' => $request->input('InventoryLocation'),
-            'InventoryArchiveDate' => $request->input('InventoryArchiveDate'),
-            'InventoryCategory' => $request->input('InventoryCategory'),
-            'InventorySupplier' => $request->input('InventorySupplier'),
-
+        $validatedData = $request->validate([
+            'InventoryName' => 'required',
+            'InventoryDescription' => 'required',
+            'InventoryLocation' => 'required',
+            'InventoryArchiveDate' => 'required',
+            'InventoryCategory' => 'required',
+            'InventorySupplier' => 'required',
         ]);
+
+        // Update the inventory item with the new data
+        $inventory->update($validatedData);
 
         // Redirect to the inventory item details page or any other appropriate route
         return redirect()->route('inventory.index')->with('success', 'Inventory item updated successfully!');
     }
 
-    // public function update(InventoryRequest $request, $id)
-    // {
-    //     $inventory = Inventory::findOrFail($id);
-
-    //     // Update the inventory item with the new data
-    //     $inventory->update($request->validated());
-
-    //     return redirect()->route('inventories')->with('success', 'Inventory item updated successfully!');
-    // }
 }
-
-

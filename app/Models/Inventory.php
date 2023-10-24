@@ -18,4 +18,8 @@ class Inventory extends Model
 
 
    ];
+    public function contract()
+    {
+        return $this->hasOne(Contract::class, 'inventory_id');
+    }
 }

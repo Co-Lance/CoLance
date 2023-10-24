@@ -46,24 +46,21 @@ Route::get('/offre/edit/{id}',[OffreController::class,'edit'])->name('offers.edi
 Route::put('/offre/put/{id}',[OffreController::class,'put'])->name('offers.put');
 
 //Inventory
-// Route::get('/inventories', 'InventoryController@create')->name('inventory.create');
 
 Route::get('/inventories', [InventoryController::class, 'index'])->name('inventory.index');
-Route::get('/inventory/create',[InventoryController::class,'create'])->name('addinventory');
-Route::post('/inventory/store',[InventoryController::class,'store'])->name('storeinventory');
-Route::delete('/inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('inventories.destroy');
-Route::get('/inventory/edit/{id}',[InventoryController::class,'edit'])->name('inventoryedit');
+Route::get('/inventory/create', [InventoryController::class, 'create'])->name('inventory.create');
+Route::post('/inventory/store', [InventoryController::class, 'store'])->name('inventory.store');
+Route::delete('/inventory/delete/{id}', [InventoryController::class, 'destroy'])->name('inventory.destroy');
+Route::get('/inventory/edit/{id}', [InventoryController::class, 'edit'])->name('inventory.edit');
+Route::put('/inventory/put/{id}', [InventoryController::class, 'update'])->name('inventory.update');
 
-Route::put('/inventory/put/{id}',[InventoryController::class,'put'])->name('inventories.put');
-// Route::get('/inventories', [InventoryController::class, 'index'])->name('inventories');
 
 
 //Route::resource('/contract', ContractController::class);
-Route::get('/contract', [ContractController::class, 'index'])->name('contract.index');
-Route::get('/contract/create',[ContractController::class,'create'])->name('addcontract');
-Route::post('/contract/store',[ContractController::class,'store'])->name('storecontract');
-Route::get('/contract/delete/{id}', [ContractController::class, 'destroy'])->name('contract.destroy');
-Route::get('/contract/edit/{id}',[ContractController::class,'edit'])->name('contractedit');
-Route::put('/contract/put/{id}',[ContractController::class,'put'])->name('contract.put');
-
-
+Route::get('/contracts', [ContractController::class, 'index'])->name('contracts.index');
+Route::get('/contracts/create', [ContractController::class, 'create'])->name('contracts.create');
+Route::post('/contracts', [ContractController::class, 'store'])->name('contracts.store');
+Route::get('/contracts/{id}', [ContractController::class, 'show'])->name('contracts.show');
+Route::get('/contracts/{id}/edit', [ContractController::class, 'edit'])->name('contracts.edit');
+Route::put('/contracts/{id}', [ContractController::class, 'update'])->name('contracts.update');
+Route::delete('/contracts/{id}', [ContractController::class, 'destroy'])->name('contracts.destroy');

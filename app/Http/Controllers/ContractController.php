@@ -7,54 +7,68 @@ use App\Models\Contract;
 
 class ContractController extends Controller
 {
-       public function index()
-       {
-           $contracts = Contract::all();
-           return view ('contracts.index')->with('contracts', $contracts);
-       }
+    public function index()
+    {
+        $contracts = Contract::all();
+        return view('contracts.index', compact('contracts'));
+    }
+
+    public function create()
+    {
+        return view('contracts.create');
+    }
+
+    public function store(Request $request)
+    {
+        $data = $request->validate([
+            'contract_name' => 'required',
+            'contract_type' => 'required',
+            'contract_status' => 'required',
+            'contract_description' => 'required',
+            'contract_date' => 'required',
+            // You may add other validation rules as needed
+        ]);
+
+        $data['user_id'] = 1; // You may change this to match the authenticated user's ID
+
+        Contract::create($data);
+
+        return redirect()->route('contracts.index')->with('flash_message', 'Contract Added!');
+    }
+
+    public function show($id)
+    {
+        $contract = Contract::findOrFail($id);
+        return view('contracts.show', compact('contract'));
+    }
+
+    public function edit($id)
+    {
+        $contract = Contract::find($id);
+        return view('your_view_name', compact('contract'));
+    }
 
 
-       public function create()
-       {
-           return view('contracts.create');
-       }
+    public function update(Request $request, $id)
+    {
+        $data = $request->validate([
+            'contract_name' => 'required',
+            'contract_type' => 'required',
+            'contract_status' => 'required',
+            'contract_description' => 'required',
+            'contract_date' => 'required',
+            // You may add other validation rules as needed
+        ]);
 
+        $contract = Contract::findOrFail($id);
+        $contract->update($data);
 
-       public function store(Request $request)
-       {
-           $input = $request->all();
-           $input['user_id'] = 1;
-           Contract::create($input);
-           return redirect('/contract')->with('flash_message', 'Contract Addedd!');
-       }
+        return redirect()->route('contracts.index')->with('flash_message', 'Contract Updated!');
+    }
 
-
-       public function show($id)
-       {
-           $contract = Contract::find($id);
-           return view('contracts.show')->with('contracts', $contract);
-       }
-
-
-       public function edit($id)
-       {
-           $contract = Contract::find($id);
-           return view('contracts.edit')->with('contracts', $contract);
-       }
-
-
-       public function update(Request $request, $id)
-       {
-           $contract = Contract::find($id);
-           $input = $request->all();
-           $contract->update($input);
-           return redirect('contract')->with('flash_message', 'contract Updated!');
-       }
-
-
-       public function destroy($id)
-       {
-           Contract::destroy($id);
-           return redirect('/contract')->with('flash_message', 'contract deleted!');
-       }
-   }
+    public function destroy($id)
+    {
+        Contract::destroy($id);
+        return redirect()->route('contracts.index')->with('flash_message', 'Contract deleted!');
+    }
+}
