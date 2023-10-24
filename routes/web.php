@@ -61,7 +61,8 @@ Route::group(['middleware' => ['role:admin']], function() {
     Route::post('/storeCategory', [CategoryController::class, 'storeCategory'])->name('products.store');
     Route::get('/categories/delete/{id}', [CategoryController::class, 'delete'])->name('categories.delete');
     Route::get('/categories/edit/{id}', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');    Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
+    Route::put('/categories/edit/mod/{id}', [CategoryController::class, 'update'])->name('categories.update');   
+    Route::get('/reclamation', [ReclamationController::class, 'index'])->name('reclamation.index');
     Route::get('/reclamation/delete/{id}', [ReclamationController::class, 'delete'])->name('reclamation.delete');
     Route::get('/reclamation/edit/{id}', [ReclamationController::class, 'edit'])->name('reclamation.edit');
     Route::get('/generate-pdf/{id}', [PDFController::class, 'generatePDF']);

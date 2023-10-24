@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
+
 
 class CategoryController extends Controller
 {
@@ -32,7 +34,7 @@ public function delete($id)
     if (!$category) {
         return response()->json(['message' => 'Category not found'], 404);
     }
-
+    DB::table('category_product')->where('category_id', $id)->delete();
     $category->delete();
 
     // Redirect back or to a desired page after deletion
