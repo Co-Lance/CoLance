@@ -80,8 +80,9 @@
                     class="bg-green-700 hover:bg-green-900 text-white py-2 px-4 rounded-md flex justify-end">Back To
                     Forums</a>
                 <div class="flex flex-wrap justify-center mt-5 space-y-4 space-x-4">
+
                     @foreach($forums as $forum)
-                    <div class="flex flex-col max-w-xs bg-white border border-gray-200 rounded-lg shadow">
+                    <div class="flex flex-col max-w-xs bg-white border border-gray-200 rounded-lg shadow h-full">
                         <div class="flex justify-center rounded-t-lg w-full h-2/4">
                             <h5 class="ml-2 mb-2 text-2xl font-bold tracking-tight text-gray-900">
                                 {{ $forum->title }}
@@ -91,14 +92,14 @@
                             <div class="flex flex-wrap gap-1 mt-3 mb-3">
                                 <div class="font-bold underline">Comments:</div>
                                 @foreach($forum->comments as $comment)
-                                <div class="rounded-l px-3 py-1 text-sm font-medium">
+                                <div class="px-3 py-1 text-sm font-medium">
                                     {{ $comment->content }}
                                 </div>
                                 @endforeach
                             </div>
                             <div>
-
-                                <form action="{{ route('comments.delete', ['id' => $forum->id]) }}" method="POST">
+                                @foreach ($forum->comments as $comment)
+                                <form action="{{ route('comments.delete', ['id' => $comment->id]) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -112,7 +113,7 @@
                                         </svg>
                                     </button>
                                 </form>
-                                <a href="{{ route('comments.edit', ['id' => $forum->id]) }}"> <span
+                                <a href="{{ route('comments.edit', ['id' => $comment->id]) }}"> <span
                                         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-700 border-2 border-green-700 rounded-lg hover:bg-green-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-500">
                                         modifier <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor"
                                             viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -121,6 +122,7 @@
                                                 clip-rule="evenodd"></path>
                                         </svg> </span>
                                 </a>
+                                @endforeach
 
                                 <a href="{{ route('comments.create', ['forumId' => $forum->id]) }}">
                                     @csrf
@@ -137,6 +139,7 @@
                                         </svg>
                                     </span>
                                 </a>
+
                             </div>
                         </div>
                     </div>
