@@ -68,6 +68,23 @@ Route::group(['middleware' => ['role:admin']], function() {
 
 });
 
+//forum
+Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
+Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
+Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
+Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
+Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
+Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
+Route::get('/forums/search', [ForumController::class, 'searchByTitle'])->name('forums.search');
+
+//comment
+Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::get('/comments/create/{forumId}', [CommentController::class, 'create'])->name('comments.create');
+Route::post('/comments/{forumId}', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
+Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
+
 Route::group(['middleware' => ['role:user']], function() {
     //products
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
@@ -99,22 +116,5 @@ Route::group(['middleware' => ['role:user']], function() {
     Route::get('/request/delete/{id}',[RequestController::class,'deleteRequest'])->name('requests.delete');
     Route::get('/request/create/{id}',[RequestController::class,'createrequest'])->name('request.create');
     Route::post('/request/store/{id}',[RequestController::class,'store'])->name('requests.store');
-
-    //forum
-    Route::get('/forums', [ForumController::class, 'index'])->name('forums.index');
-    Route::get('/forums/create', [ForumController::class, 'create'])->name('forums.create');
-    Route::post('/forums', [ForumController::class, 'store'])->name('forums.store');
-    Route::get('/forums/delete/{id}', [ForumController::class, 'delete'])->name('forums.delete');
-    Route::get('/forums/edit/{id}', [ForumController::class, 'edit'])->name('forums.edit');
-    Route::put('/forums/edit/mod/{id}', [ForumController::class, 'update'])->name('forums.update');
-    Route::get('/forums/search', [ForumController::class, 'searchByTitle'])->name('forums.search');
-
-    //comment
-    Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
-    Route::get('/comments/create/{forumId}', [CommentController::class, 'create'])->name('comments.create');
-    Route::post('/comments/{forumId}', [CommentController::class, 'store'])->name('comments.store');
-    Route::get('/comments/{id}/edit', [CommentController::class, 'edit'])->name('comments.edit');
-    Route::put('/comments/update/{id}', [CommentController::class, 'update'])->name('comments.update');
-    Route::delete('/comments/delete/{id}', [CommentController::class, 'delete'])->name('comments.delete');
 
 });
