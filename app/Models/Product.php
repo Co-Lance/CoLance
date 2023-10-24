@@ -16,4 +16,16 @@ class Product extends Model
         'quantity',
         'description',
     ];
+    public function offre()
+    {
+        return $this->belongsTo(Offre::class);
+    }
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+    public function reclamations()
+    {
+        return $this->hasMany(Reclamation::class);
+    }
 }
